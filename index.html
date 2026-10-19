@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DualCommander is a free, open-source two-pane file manager for macOS, Windows, and Linux. Built with Go and Fyne.">
+  <meta name="theme-color" content="#142338">
+  <link rel="canonical" href="https://dualcommander.github.io/">
+  <link rel="icon" type="image/png" href="dualcommander.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <title>DualCommander — two panes, less friction</title>
+  <style>
+    :root { color-scheme: light dark; --bg: #f5f7fb; --card: #fff; --text: #142338; --muted: #46566b; --accent: #1755b8; --line: #d4ddea; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 1rem/1.65 system-ui, sans-serif; }
+    a { color: var(--accent); text-underline-offset: .2em; }
+    a:hover { text-decoration-thickness: .15em; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+    .wrap { width: min(68rem, 100% - 3rem); margin: auto; }
+    .skip { position: absolute; top: -5rem; padding: .5rem; background: var(--card); }
+    .skip:focus { top: .5rem; }
+    header, nav, .actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    header { padding-block: 1.5rem; justify-content: space-between; border-bottom: 1px solid var(--line); }
+    .brand { color: var(--text); font-weight: 750; text-decoration: none; display: inline-flex; gap: .75rem; align-items: center; }
+    .brand img { width: 2.5rem; height: 2.5rem; }
+    .hero { padding-block: 2rem 1rem; }
+    .eyebrow { color: var(--accent); font-weight: 700; }
+    h1 { font-size: clamp(2rem, 5.5vw, 4rem); line-height: 1.1; letter-spacing: -.045em; margin: .75rem 0 1rem; }
+    h2 { font-size: 1.75rem; line-height: 1.25; }
+    h3 { margin-top: 0; }
+    .lead { max-width: 46rem; margin: .75rem 0; font-size: 1.125rem; color: var(--muted); }
+    .actions { margin-block: 1rem .5rem; }
+    .hero .note { margin: .5rem 0 0; }
+    .button { display: inline-block; padding: .7rem 1.2rem; border: 1px solid var(--accent); border-radius: .5rem; font-weight: 650; text-decoration: none; }
+    .primary { background: var(--accent); color: #fff; }
+    .note, footer { color: var(--muted); font-size: .9rem; }
+    section { padding-block: 2rem; scroll-margin-top: 1rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1rem; }
+    article { padding: 1.5rem; border: 1px solid var(--line); border-radius: .75rem; background: var(--card); }
+    article p:last-child { margin-bottom: 0; }
+    figure { margin: 0; }
+    figure img { display: block; width: 100%; height: auto; }
+    figcaption { margin-top: .75rem; color: var(--muted); }
+    kbd { border: 1px solid var(--line); border-bottom-width: 3px; border-radius: .25rem; padding: .1rem .4rem; background: var(--card); font-size: .9em; }
+    dl { display: grid; grid-template-columns: max-content 1fr; gap: .8rem 1.5rem; }
+    dd { margin: 0; }
+    footer { margin-top: 2rem; padding-block: 2rem; border-top: 1px solid var(--line); }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0e1827; --card: #142338; --text: #eef3fc; --muted: #b6c4d9; --accent: #9dc5ff; --line: #34465f; }
+      .primary { background: #245db1; color: #fff; }
+    }
+    @media (max-width: 36rem) { .hero { padding-top: 1.5rem; } nav { gap: 1rem; } dl { grid-template-columns: 1fr; } dd { margin-bottom: .5rem; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./"><img src="dualcommander.png" alt="" width="40" height="40">DualCommander</a>
+      <nav aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#download">Download</a>
+        <a href="https://github.com/dualcommander/dualcommander">GitHub</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="title">
+        <p class="eyebrow">macOS · Windows · Linux</p>
+        <h1 id="title">two panes, less friction</h1>
+        <figure id="screenshots">
+          <a href="screenshots/dualcommander.png" aria-label="View full-size DualCommander preview"><img src="screenshots/dualcommander.png" alt="Overlapping DualCommander previews with sample files: light mode behind, dark mode in front. Brief view left, detailed view right, with app navigation and action bars; native OS title and menu bars omitted." width="1380" height="660" fetchpriority="high" decoding="async"></a>
+        </figure>
+        <p class="lead">Move through your files, not through windows. A keyboard-friendly file manager with two panes, light and dark themes, and a view for each side.</p>
+        <div class="actions">
+          <a class="button primary" href="#download">Get DualCommander</a>
+          <a class="button" href="https://github.com/dualcommander/dualcommander">Explore the source</a>
+        </div>
+      </section>
+      <section id="features" aria-labelledby="features-title">
+        <h2 id="features-title">Familiar tools. Focused workflow.</h2>
+        <div class="grid">
+          <article><h3>Files side by side</h3><p>Copy, move, rename, and delete across two panes. Background operations include progress and cancellation. Deletions use Trash or Recycle Bin by default.</p></article>
+          <article><h3>Keyboard first</h3><p>Switch panes with Tab. Copy with F5, move with F6, create folders with F7. Mark files individually or as a range.</p></article>
+          <article><h3>Look inside archives</h3><p>Browse ZIP, TAR, 7z, RAR, and compressed files without leaving the pane. Archive browsing is read-only; editing and file operations inside archives are unavailable.</p></article>
+          <article><h3>At home on your OS</h3><p>Open files in your default apps, edit in an external text editor, reveal files, or launch a terminal in the current folder.</p></article>
+          <article><h3>Your view, remembered</h3><p>Brief and detailed views, sorting, shared favourite folders, light and dark themes, adjustable density, and font sizes. Pane paths and window state persist.</p></article>
+          <article><h3>Stay up to date</h3><p>Folder changes refresh automatically through native OS notifications. Find files by name or content, and switch between mounted volumes.</p></article>
+        </div>
+      </section>
+      <section id="download" aria-labelledby="download-title">
+        <h2 id="download-title">Get DualCommander</h2>
+        <p>Find published packages on <a href="https://github.com/dualcommander/dualcommander/releases">GitHub Releases</a>. If no release is available yet, check successful <a href="https://github.com/dualcommander/dualcommander/actions/workflows/build.yml">GitHub Actions builds</a> for downloadable artifacts (GitHub sign-in required).</p>
+        <ul>
+          <li><strong>macOS:</strong> Apple Silicon (arm64) and Intel (amd64).</li>
+          <li><strong>Windows:</strong> amd64.</li>
+          <li><strong>Linux:</strong> amd64.</li>
+        </ul>
+        <p class="note">macOS and Windows packages are unsigned and not notarized. Your OS may show security warnings. Download only from the project repository and review those warnings before running.</p>
+        <p>Prefer building locally? Follow the <a href="https://github.com/dualcommander/dualcommander/blob/main/CONTRIBUTING.md">development guide</a>.</p>
+      </section>
+      <section aria-labelledby="keys-title">
+        <h2 id="keys-title">A few keys to get moving</h2>
+        <dl>
+          <dt><kbd>Tab</kbd></dt><dd>Switch active pane</dd>
+          <dt><kbd>Enter</kbd></dt><dd>Open a folder or file</dd>
+          <dt><kbd>Space</kbd> / <kbd>Insert</kbd></dt><dd>Mark or unmark an item</dd>
+          <dt><kbd>F4</kbd></dt><dd>Edit with an external text editor</dd>
+          <dt><kbd>F5</kbd> / <kbd>F6</kbd></dt><dd>Copy / move</dd>
+          <dt><kbd>Shift</kbd> + <kbd>F6</kbd></dt><dd>Rename selected item</dd>
+          <dt><kbd>F7</kbd> / <kbd>F8</kbd></dt><dd>Create a folder / delete</dd>
+          <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>F</kbd></dt><dd>Find files (Cmd on macOS, Ctrl on Windows and Linux)</dd>
+        </dl>
+        <p>Full controls and archive support: <a href="https://github.com/dualcommander/dualcommander#readme">user guide</a>.</p>
+      </section>
+    </main>
+    <footer>DualCommander · <a href="https://github.com/dualcommander/dualcommander/blob/main/LICENSE">MIT license</a> · <a href="https://github.com/dualcommander/dualcommander/issues">Report an issue</a> · <a href="https://github.com/dualcommander/dualcommander.github.io">Website source</a></footer>
+  </div>
+</body>
+</html>
