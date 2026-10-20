@@ -12,7 +12,17 @@ Regenerate from the app repository with:
 WEBSITE_SCREENSHOT="$PWD/../dualcommander.github.io/screenshots/dualcommander.png" go test ./internal/commander -run '^TestWebsiteScreenshot$' -count=1
 ```
 
+Refresh icons from the same app checkout (ImageMagick required):
+
+```sh
+cp assets/dualcommander.png ../dualcommander.github.io/dualcommander.png
+magick assets/dualcommander.png -define icon:auto-resize=48,32,16 ../dualcommander.github.io/favicon.ico
+magick assets/dualcommander.png -resize 180x180 ../dualcommander.github.io/apple-touch-icon.png
+```
+
 Keep image dimensions in `index.html` in sync when replacing screenshots.
+Keep feature copy and shortcuts aligned with the app README; archive browsing
+remains read-only. The Pages workflow runs `check.py` before deployment.
 
 ## Preview
 
