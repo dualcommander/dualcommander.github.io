@@ -1,0 +1,16 @@
+:root { color-scheme: light; --bg: #fff; --card: #fafafa; --text: #222; --muted: #595959; --accent: #333; --line: #ddd; }
+:root[data-theme="dark"] { color-scheme: dark; --bg: #181818; --card: #222; --text: #eee; --muted: #bbb; --accent: #ddd; --line: #444; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { color-scheme: dark; --bg: #181818; --card: #222; --text: #eee; --muted: #bbb; --accent: #ddd; --line: #444; }
+}
+.theme-picker { display: inline-flex; align-items: center; gap: .5rem; font-size: .9rem; }
+.theme-picker[hidden] { display: none; }
+.theme-picker select { padding: .35rem .5rem; border: 1px solid var(--line); border-radius: .25rem; background: var(--bg); color: var(--text); font: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.primary { color: var(--bg); }
+.annotated { background: var(--bg); }
+.pin { background: #333; color: #fff; }
+@media print {
+  :root { color-scheme: light !important; --bg: #fff !important; --card: #fafafa !important; --text: #222 !important; --muted: #595959 !important; --accent: #333 !important; --line: #ddd !important; }
+  .theme-picker { display: none; }
+}

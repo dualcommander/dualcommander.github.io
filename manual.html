@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learn DualCommander's two-pane file manager: annotated screenshots, settings, file operations, and editor and terminal commands for macOS, Windows, and Linux.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://dualcommander.github.io/manual.html">
+  <link rel="icon" type="image/png" href="dualcommander.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <title>User manual — DualCommander</title>
+  <style>
+    :root { color-scheme: light; --bg: #fff; --card: #fafafa; --text: #222; --muted: #595959; --accent: #333; --line: #ddd; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 1rem/1.65 system-ui, sans-serif; }
+    a { color: var(--accent); text-underline-offset: .2em; }
+    a:hover { text-decoration-thickness: .15em; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    .wrap { width: min(76rem, 100% - 3rem); margin: auto; }
+    .skip { position: absolute; top: -5rem; padding: .5rem; background: var(--card); z-index: 2; }
+    .skip:focus { top: .5rem; }
+    header, header nav { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    header { padding-block: 1.5rem; justify-content: space-between; border-bottom: 1px solid var(--line); }
+    .brand { color: var(--text); font-weight: 750; text-decoration: none; display: inline-flex; gap: .75rem; align-items: center; }
+    .brand img { width: 2.5rem; height: 2.5rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; letter-spacing: -.04em; }
+    h2 { font-size: 1.75rem; line-height: 1.25; }
+    h3 { line-height: 1.35; }
+    section, li[id] { scroll-margin-top: 1.5rem; }
+    section { padding-block: 1rem; }
+    .lead { max-width: 48rem; color: var(--muted); font-size: 1.125rem; }
+    .contents { padding-block: 1rem; border-block: 1px solid var(--line); }
+    .contents ul { padding-left: 1.5rem; }
+    .contents li { margin-block: .35rem; }
+    figure { margin: 1.5rem 0; }
+    .image-scroll, .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: .5rem; }
+    .annotated { position: relative; min-width: 48rem; background: #fff; }
+    .annotated img { display: block; width: 100%; height: auto; }
+    .pin { position: absolute; left: var(--x); top: var(--y); display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border: 2px solid #fff; border-radius: 50%; background: var(--accent); color: #fff; font-size: .9rem; font-weight: 750; line-height: 1; text-decoration: none; }
+    .pin:hover { background: #000; }
+    figcaption, .note { color: var(--muted); font-size: .9rem; }
+    figcaption { margin-top: .75rem; }
+    .hints { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); gap: 1rem 2rem; padding-left: 1.75rem; }
+    .hints li::marker { color: var(--accent); font-weight: 750; }
+    .hints strong { display: block; }
+    .settings-figure { max-width: 56.25rem; }
+    .callout { padding: .5rem 1rem; border-left: 2px solid var(--line); }
+    kbd { border: 1px solid var(--line); border-bottom-width: 3px; border-radius: .25rem; padding: .1rem .35rem; background: var(--card); font-size: .9em; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: .9em; overflow-wrap: anywhere; }
+    :not(pre) > code { padding: .15em .4em; border: 1px solid var(--line); border-radius: .3rem; background: var(--card); color: var(--accent); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+    pre { margin-block: 1rem 1.5rem; padding: 1.25rem 1.5rem; border: 1px solid var(--line); border-radius: .25rem; background: var(--card); color: var(--text); line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2; }
+    pre code { font-size: .9rem; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: .65rem 1rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: var(--card); }
+    footer { margin-top: 2rem; padding-block: 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+    @media (max-width: 36rem) { .wrap { width: calc(100% - 2rem); } header nav { gap: 1rem; } }
+    @media print { .contents, .skip, header nav, .pin { display: none; } .annotated { min-width: 0; } .wrap { width: 100%; } pre, :not(pre) > code { background: #fff; } }
+  </style>
+  <link rel="stylesheet" href="theme.css">
+  <script src="theme.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="index.html"><img src="dualcommander.png" alt="" width="40" height="40">DualCommander</a>
+      <nav aria-label="Main navigation"><a href="index.html#download">Download</a><a href="manual.html" aria-current="page">User manual</a><a href="https://github.com/dualcommander/dualcommander">GitHub</a></nav>
+      <label class="theme-picker" hidden>Theme <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+    </header>
+    <main id="main">
+      <h1>User manual</h1>
+      <p class="lead">Browse in one pane, choose a destination in the other. This guide covers everyday file management, settings, and connecting your favourite editor and terminal.</p>
+      <p><strong>Shortcut key:</strong> <kbd>Mod</kbd> means <kbd>Cmd</kbd> on macOS and <kbd>Ctrl</kbd> on Windows/Linux. If your keyboard uses function keys for media controls, you may need <kbd>Fn</kbd> too.</p>
+      <nav class="contents" aria-label="On this page">
+        <strong>On this page</strong>
+        <ul>
+          <li><a href="#quick-start">Your first copy</a></li>
+          <li><a href="#panes">Pane tour</a></li>
+          <li><a href="#file-actions">Everyday file actions</a></li>
+          <li><a href="#settings">Settings tour</a></li>
+          <li><a href="#command-format">Custom command rules</a></li>
+          <li><a href="#editors">Use an alternative editor</a>
+            <ul>
+              <li><a href="#editors-macos">macOS — Visual Studio Code</a></li>
+              <li><a href="#editors-windows">Windows — Visual Studio Code or Notepad++</a></li>
+              <li><a href="#editors-linux">Linux — Visual Studio Code or Kate</a></li>
+            </ul>
+          </li>
+          <li><a href="#terminals">Open in terminal</a>
+            <ul>
+              <li><a href="#terminals-macos">macOS — iTerm</a></li>
+              <li><a href="#terminals-windows">Windows — Windows Terminal or PowerShell</a></li>
+              <li><a href="#terminals-linux">Linux — GNOME Terminal, Konsole, or kitty</a></li>
+              <li><a href="#command-troubleshooting">Troubleshooting external commands</a></li>
+            </ul>
+          </li>
+          <li><a href="#archives">Browse archives safely</a></li>
+          <li><a href="#saved-settings">Saved settings and sharing configuration</a>
+            <ul>
+              <li><a href="#settings-example">settings.json example</a></li>
+              <li><a href="#favourites-example">favourites.json example</a></li>
+              <li><a href="#state-example">state.json example</a></li>
+              <li><a href="#move-configuration">Move configuration to another machine</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section id="quick-start" aria-labelledby="quick-title">
+        <h2 id="quick-title">Your first copy</h2>
+        <ol>
+          <li>Open your source folder in the left pane. Double-click folders, or select one and press <kbd>Enter</kbd>.</li>
+          <li>Open your destination folder in the right pane. Click the path field, enter a folder path, then press <kbd>Enter</kbd>.</li>
+          <li>Click a source file in the left pane. For several files, mark each with <kbd>Space</kbd> or <kbd>Mod</kbd>+click.</li>
+          <li>Press <kbd>F5</kbd> or click <strong>F5 Copy</strong>. Check the target path, then confirm <strong>Copy</strong>.</li>
+        </ol>
+        <p>Copy/move dialogs start with the other pane’s folder as the target. Check that path before confirming. Background operations show progress and cancellation controls.</p>
+      </section>
+      <section id="panes" aria-labelledby="panes-title">
+        <h2 id="panes-title">Pane tour</h2>
+        <p>Both panes have the same controls. Click inside a pane to make it active; <kbd>Tab</kbd> switches sides. The screenshot shows Brief view on the left and Detailed view on the right.</p>
+        <figure>
+          <div class="image-scroll" tabindex="0" role="region" aria-label="Annotated pane screenshot; scroll horizontally on smaller screens">
+            <div class="annotated">
+              <picture><source data-dark media="(prefers-color-scheme: dark)" srcset="screenshots/manual-panes-dark.png"><img src="screenshots/manual-panes.png" alt="DualCommander with source Documents on the left, Backup on the right, a marked readme.md file, pane navigation controls, and the bottom function-key bar. Numbered hints follow below." width="1200" height="560"></picture>
+              <a class="pin" style="--x: 3%; --y: 0%" href="#pane-volume" aria-label="1. Volumes and free space">1</a>
+              <a class="pin" style="--x: 17%; --y: 6%" href="#pane-path" aria-label="2. Navigation and path">2</a>
+              <a class="pin" style="--x: 43%; --y: 6%" href="#pane-favourites" aria-label="3. Favourites">3</a>
+              <a class="pin" style="--x: 47%; --y: 11%" href="#pane-view" aria-label="4. View mode">4</a>
+              <a class="pin" style="--x: 27%; --y: 12%" href="#pane-sort" aria-label="5. Sort headers">5</a>
+              <a class="pin" style="--x: 20%; --y: 43%" href="#pane-files" aria-label="6. Cursor and marks">6</a>
+              <a class="pin" style="--x: 28%; --y: 88%" href="#pane-status" aria-label="7. Status line">7</a>
+              <a class="pin" style="--x: 69%; --y: 94%" href="#pane-actions" aria-label="8. Action bar">8</a>
+            </div>
+          </div>
+          <figcaption>App-rendered sample on macOS; icons, paths, and native menus vary by OS. Select a numbered hint, or read the matching list. Small screen? Scroll the screenshot sideways.</figcaption>
+        </figure>
+        <ol class="hints">
+          <li id="pane-volume"><strong>Volumes and free space</strong>The top-left dropdown selects a mounted drive or volume. The top-right value shows free space for that pane’s filesystem.</li>
+          <li id="pane-path"><strong>Navigation and path</strong>Home opens your home folder; the up arrow goes to the parent. Enter a path in the field and press <kbd>Enter</kbd>. The <code>..</code> row, <kbd>Backspace</kbd>, or <kbd>Mod</kbd>+<kbd>↑</kbd> also goes up.</li>
+          <li id="pane-favourites"><strong>Favourite folders</strong>The star adds/removes the current folder. The adjacent dropdown opens saved favourites, shared between both panes.</li>
+          <li id="pane-view"><strong>Brief or Detailed</strong>The view button toggles this pane’s layout. Its icon shows the view you can switch to. Brief emphasises names; Detailed also shows size, modified date, and attributes. Use <kbd>Mod</kbd>+<kbd>1</kbd> / <kbd>2</kbd> for the active pane.</li>
+          <li id="pane-sort"><strong>Sort headers</strong>Click Name, Size, or Date to sort; click again to reverse. The triangle shows direction. Sorting works in both views.</li>
+          <li id="pane-files"><strong>Cursor versus marks</strong>Click sets the cursor; double-click or <kbd>Enter</kbd> opens. Marked names use a distinct colour (red here). <kbd>Space</kbd>/<kbd>Insert</kbd> or <kbd>Mod</kbd>+click toggles marks; <kbd>Shift</kbd>+click marks a range. Copy, move, and delete use marks, or the cursor item if none are marked.</li>
+          <li id="pane-status"><strong>Status and selection totals</strong>Without marks, the bottom line describes the cursor item. With marks, it shows selected size and file/folder counts. <kbd>Space</kbd> also requests recursive folder size; large folders take time to count.</li>
+          <li id="pane-actions"><strong>Action bar</strong>Buttons act on the active pane, just like their F-keys. Use Edit, Copy, Move, MkDir, Delete, Terminal, or Quit. Copy/move default to the other pane’s folder.</li>
+        </ol>
+        <p><kbd>Mod</kbd>+<kbd>U</kbd> swaps panes; <kbd>Mod</kbd>+<kbd>E</kbd> opens the active folder in the other pane. Folder changes refresh automatically; <kbd>Ctrl</kbd>+<kbd>R</kbd> (also <kbd>Cmd</kbd>+<kbd>R</kbd> on macOS) reloads while preserving cursor and marks.</p>
+      </section>
+      <section id="file-actions" aria-labelledby="actions-title">
+        <h2 id="actions-title">Everyday file actions</h2>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="File actions and shortcuts">
+          <table>
+            <thead><tr><th scope="col">Action</th><th scope="col">Shortcut</th><th scope="col">How it works</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Open</th><td><kbd>Enter</kbd></td><td>Enter a folder or supported archive; open other files with the OS-associated application.</td></tr>
+              <tr><th scope="row">Edit</th><td><kbd>F4</kbd></td><td>Open the cursor file in your configured external editor. No built-in editor.</td></tr>
+              <tr><th scope="row">New file</th><td><kbd>Shift</kbd>+<kbd>F4</kbd></td><td>Enter a name; create and select the file. Press F4 afterwards to edit it.</td></tr>
+              <tr><th scope="row">Copy / move</th><td><kbd>F5</kbd> / <kbd>F6</kbd></td><td>Check the target in the dialog. If an existing file conflicts, review the overwrite choices.</td></tr>
+              <tr><th scope="row">Rename</th><td><kbd>F2</kbd> / <kbd>Shift</kbd>+<kbd>F6</kbd></td><td>Rename the cursor item, not all marks. F2 on <code>..</code> selects the current path for editing.</td></tr>
+              <tr><th scope="row">New folder</th><td><kbd>F7</kbd></td><td>Create a folder in the active pane. <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> also works.</td></tr>
+              <tr><th scope="row">Delete</th><td><kbd>F8</kbd> / <kbd>Delete</kbd></td><td>Review the confirmation. Uses Trash/Recycle Bin when enabled in Settings.</td></tr>
+              <tr><th scope="row">Mark / unmark all</th><td><kbd>Mod</kbd>+<kbd>A</kbd> / <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></td><td>Choose all items or clear the active pane’s marks.</td></tr>
+              <tr><th scope="row">Find files</th><td><kbd>Mod</kbd>+<kbd>F</kbd> / <kbd>Alt</kbd>+<kbd>F7</kbd></td><td>Search by name or content from the active folder.</td></tr>
+              <tr><th scope="row">Reveal</th><td><kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd></td><td>Show the selection in Finder, Explorer, or your file manager; use the current folder when nothing is selected.</td></tr>
+              <tr><th scope="row">Terminal</th><td><kbd>F9</kbd></td><td>Open a terminal in the active folder, not the folder under the cursor.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Right-click an item for Open, OS-specific Open With / Get Info or Properties, reveal, and copy path. The application Menu key also opens the cursor item’s context menu.</p>
+        <p class="callout"><strong>Deletion safety:</strong> Keep “Move deleted files to Trash” enabled unless you intend permanent deletion. With it disabled, delete removes files permanently rather than sending them to Trash/Recycle Bin.</p>
+      </section>
+      <section id="settings" aria-labelledby="settings-title">
+        <h2 id="settings-title">Settings tour</h2>
+        <p>Open <strong>Settings</strong> with <kbd>Mod</kbd>+<kbd>,</kbd> or the application menu (DualCommander on macOS; File on Windows/Linux). Changes save automatically; there is no Save button. Invalid command lists are not saved.</p>
+        <figure class="settings-figure">
+          <div class="image-scroll" tabindex="0" role="region" aria-label="Annotated settings screenshot; scroll horizontally on smaller screens">
+            <div class="annotated">
+              <picture><source data-dark media="(prefers-color-scheme: dark)" srcset="screenshots/manual-settings-dark.png"><img src="screenshots/manual-settings.png" alt="Complete Settings form showing Appearance, File views, File deletion, Archives, and all five External applications fields, including Compare files and Compare folder contents. Numbered explanations follow below." width="900" height="1169" loading="lazy"></picture>
+              <a class="pin" style="--x: 89%; --y: 6.5%" href="#setting-appearance" aria-label="1. Appearance">1</a>
+              <a class="pin" style="--x: 89%; --y: 19.5%" href="#setting-views" aria-label="2. File views">2</a>
+              <a class="pin" style="--x: 89%; --y: 32.5%" href="#setting-deletion" aria-label="3. File deletion">3</a>
+              <a class="pin" style="--x: 89%; --y: 39%" href="#setting-archives" aria-label="4. Archives">4</a>
+              <a class="pin" style="--x: 89%; --y: 45.5%" href="#setting-external" aria-label="5. External applications">5</a>
+            </div>
+          </div>
+          <figcaption>Full settings content in the site’s selected theme, with macOS defaults shown as placeholder text. Scroll the dialog on shorter displays; defaults differ by OS.</figcaption>
+        </figure>
+        <ol class="hints">
+          <li id="setting-appearance"><strong>Appearance</strong>Theme follows the system or uses light/dark. Density chooses standard or compact file rows. Font size adjusts file-list text; use larger text for readability or compact rows to fit more files.</li>
+          <li id="setting-views"><strong>File views</strong>Choose Brief/Detailed separately for left and right. Show hidden files affects both panes; <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> toggles it while browsing.</li>
+          <li id="setting-deletion"><strong>File deletion</strong>Move deleted files to Trash is enabled by default. Disabling it makes deletion permanent.</li>
+          <li id="setting-archives"><strong>Archives</strong>Browse archives in DualCommander opens supported archives like folders. Turn it off to use the OS-associated application instead. Browsing does not enable archive editing.</li>
+          <li id="setting-external"><strong>External applications</strong>Override Show in file manager, Open folder in terminal, and Edit file (F4); leave these fields blank to restore their OS defaults. Compare files uses the cursor file in each pane; Compare folder contents uses the current pane folders. Both comparison fields require a configured tool, such as <code>["meld", "{left}", "{right}"]</code>; blank disables comparison. Configure your tool’s flags for recursive folder-content comparison. See the command rules and examples below.</li>
+        </ol>
+      </section>
+      <section id="command-format" aria-labelledby="commands-title">
+        <h2 id="commands-title">Custom command rules</h2>
+        <p>Paste a complete JSON list into the relevant Settings field: executable first, then one string per argument. Do not paste a shell command line.</p>
+        <pre><code class="command-example">["code", "--wait", "{path}"]</code></pre>
+        <ul>
+          <li><code>{path}</code> becomes the selected item’s full path. For F4, it is the file to edit.</li>
+          <li><code>{dir}</code> becomes the active pane’s folder. Commands also start with that working directory.</li>
+          <li>For comparison commands, <code>{left}</code> and <code>{right}</code> become the cursor files or current folders in the left and right panes. Use both placeholders; comparison has no OS default.</li>
+          <li>Keep each path as one argument; spaces are preserved. JSON strings need double quotes, and Windows backslashes must be doubled.</li>
+          <li>No shell is used: <code>~</code>, <code>$HOME</code>, <code>%LOCALAPPDATA%</code>, pipes, and redirects do not expand. Use an actual absolute executable path if the command is not on the app’s <code>PATH</code>.</li>
+        </ul>
+        <p class="callout"><strong>Use trusted programs only.</strong> Custom commands launch local software with your user permissions. JSON validation checks syntax, not whether a program exists or whether its arguments are safe.</p>
+      </section>
+      <section id="editors" aria-labelledby="editors-title">
+        <h2 id="editors-title">Use an alternative editor</h2>
+        <ol>
+          <li>Install your editor, then open <strong>Settings → External applications → Edit file (F4)</strong>.</li>
+          <li>Paste one command below, adapting executable paths to your installation.</li>
+          <li>Close Settings, select a regular text file, then press <kbd>F4</kbd>. Save in the external editor as usual.</li>
+        </ol>
+        <p><kbd>Enter</kbd> still uses the file’s OS association; changing F4 does not change that association. Leave the field blank for macOS’s default text editor, Windows Notepad, or Linux’s <code>xdg-open</code> association.</p>
+        <h3 id="editors-macos">macOS — Visual Studio Code</h3>
+        <p>If <code>code</code> is on the app’s PATH, use the command above. VS Code’s Command Palette offers <strong>Shell Command: Install 'code' command in PATH</strong>. Apps launched from Finder may have a different PATH than your shell. With VS Code installed in Applications, use its executable directly:</p>
+        <pre><code class="command-example">["/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code", "--wait", "{path}"]</code></pre>
+        <p>Or launch the app by its registered name, without relying on <code>code</code>:</p>
+        <pre><code class="command-example">["open", "-a", "Visual Studio Code", "{path}"]</code></pre>
+        <h3 id="editors-windows">Windows — Visual Studio Code or Notepad++</h3>
+        <p>Use the actual <code>Code.exe</code> location. This example is a per-user VS Code installation; replace <code>Alice</code> with your Windows account directory. Use the executable rather than the <code>code.cmd</code> shell wrapper.</p>
+        <pre><code class="command-example">["C:\\Users\\Alice\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe", "--wait", "{path}"]</code></pre>
+        <pre><code class="command-example">["C:\\Program Files\\Notepad++\\notepad++.exe", "{path}"]</code></pre>
+        <h3 id="editors-linux">Linux — Visual Studio Code or Kate</h3>
+        <p>These commands require the editor’s launcher on PATH. If needed, replace the first string with its installed absolute path.</p>
+        <pre><code class="command-example">["code", "--wait", "{path}"]</code></pre>
+        <pre><code class="command-example">["kate", "{path}"]</code></pre>
+        <p class="note"><code>--wait</code> tells VS Code’s launcher to wait for the file to close; DualCommander launches it asynchronously, so browsing stays available. Other editors use their own flags.</p>
+      </section>
+      <section id="terminals" aria-labelledby="terminals-title">
+        <h2 id="terminals-title">Open in terminal</h2>
+        <p>Set <strong>Settings → External applications → Open folder in terminal</strong>. Activate a normal filesystem folder, then press <kbd>F9</kbd> or click <strong>F9 Terminal</strong>. The command uses that pane’s folder, regardless of the cursor item.</p>
+        <h3 id="terminals-macos">macOS — iTerm</h3>
+        <p>With iTerm installed, paste:</p>
+        <pre><code class="command-example">["open", "-na", "ITerm", "{dir}"]</code></pre>
+        <p><code>open</code> launches the named app; <code>-n</code> requests a new instance and <code>-a</code> chooses the application. If your installation is not found by name, use its actual app bundle path:</p>
+        <pre><code class="command-example">["open", "-na", "/Applications/iTerm.app", "{dir}"]</code></pre>
+        <p>For Apple Terminal (also the blank-field default):</p>
+        <pre><code class="command-example">["open", "-a", "Terminal", "{dir}"]</code></pre>
+        <h3 id="terminals-windows">Windows — Windows Terminal or PowerShell</h3>
+        <p>Windows Terminal needs <code>wt.exe</code> available through PATH / its app execution alias. <code>-d</code> chooses the starting folder:</p>
+        <pre><code class="command-example">["wt.exe", "-d", "{dir}"]</code></pre>
+        <p>PowerShell inherits the active folder as its working directory. This is the blank-field default:</p>
+        <pre><code class="command-example">["powershell.exe", "-NoExit"]</code></pre>
+        <h3 id="terminals-linux">Linux — GNOME Terminal, Konsole, or kitty</h3>
+        <p>Choose an installed terminal. Explicit directory flags also work when a terminal reuses an existing process:</p>
+        <pre><code class="command-example">["gnome-terminal", "--working-directory={dir}"]</code></pre>
+        <pre><code class="command-example">["konsole", "--workdir", "{dir}"]</code></pre>
+        <pre><code class="command-example">["kitty", "--directory", "{dir}"]</code></pre>
+        <p>Leaving the field blank auto-detects an installed terminal, starting with <code>x-terminal-emulator</code>. If launch fails or opens the wrong folder, choose an explicit command supported by your terminal version.</p>
+        <h3 id="command-troubleshooting">Troubleshooting external commands</h3>
+        <ul>
+          <li><strong>Invalid list:</strong> use double quotes, no trailing comma, and one JSON string per argument.</li>
+          <li><strong>Executable not found:</strong> install the app or supply its full path. A launcher working in your shell may not be on DualCommander’s PATH.</li>
+          <li><strong>Wrong folder:</strong> check which pane is active and whether the terminal accepts the directory flag. Custom startup profiles can override the starting folder.</li>
+          <li><strong>Restore defaults:</strong> clear the entire field. Reveal, terminal, and editor fields use the OS default; comparison fields become disabled. No restart is needed.</li>
+        </ul>
+      </section>
+      <section id="archives" aria-labelledby="archives-title">
+        <h2 id="archives-title">Browse archives safely</h2>
+        <p>With archive browsing enabled, <kbd>Enter</kbd> or double-click opens ZIP, TAR, 7z, RAR, compressed TAR, and supported single-file compression formats such as gzip, bzip2, XZ, and Zstandard. Password-protected ZIP, 7z, and RAR are supported.</p>
+        <p class="callout"><strong>Archives are read-only.</strong> Copy/move involving archive folders is not supported; use an external extraction tool. Nested archives are not browsed in-pane. Opening a member creates a temporary copy (up to 256 MiB), removed on exit. Editing that copy does not update the archive.</p>
+        <p>DEB and RPM packages open with their OS-associated app, which may launch an installer. Use an external tool if you only want to inspect them.</p>
+      </section>
+      <section id="saved-settings" aria-labelledby="saved-title">
+        <h2 id="saved-title">Saved settings and sharing configuration</h2>
+        <p>DualCommander stores configuration under <code>~/.dualcommander/</code> in your home folder (on Windows, normally <code>C:\Users\YourName\.dualcommander\</code>):</p>
+        <ul>
+          <li><code>settings.json</code>: appearance, pane views, hidden files, deletion/archive behaviour, and external commands.</li>
+          <li><code>state.json</code>: pane paths, active pane, sorting, and window size.</li>
+          <li><code>favourites.json</code>: shared starred folder paths.</li>
+        </ul>
+        <p>Use the dialog for routine changes. Close DualCommander before editing these files by hand; manual changes load on the next start. Invalid JSON or wrong value types stop startup without overwriting the file.</p>
+        <pre><code>~/.dualcommander/
+├── settings.json     Appearance, behaviour, and external apps; share this first
+├── favourites.json   Starred folders; adapt paths on each machine
+└── state.json        Last session; usually keep local</code></pre>
+        <h3 id="settings-example">settings.json example</h3>
+        <p>This sample uses OS-default reveal, terminal, and editor apps, with comparison disabled. A command is stored as a <strong>string containing a JSON argument list</strong>, not as an array. For example, VS Code is <code>"editorCommand": "[\"code\",\"--wait\",\"{path}\"]"</code>. Use the commands from the editor and terminal sections above, escaping their double quotes when placing them inside this file.</p>
+        <pre><code class="config-example" data-file="settings.json">{
+  "appearance": { "theme": "system", "density": "standard", "fontSize": "medium" },
+  "views": {
+    "left": { "brief": true },
+    "right": { "brief": false },
+    "showHidden": false
+  },
+  "deletion": { "moveToTrash": true },
+  "archives": { "browse": true },
+  "externalApplications": {
+    "revealCommand": "",
+    "terminalCommand": "",
+    "editorCommand": "",
+    "compareFilesCommand": "",
+    "compareFoldersCommand": ""
+  }
+}</code></pre>
+        <h3 id="favourites-example">favourites.json example</h3>
+        <p>A plain array of absolute folder paths. Replace these sample paths with folders that exist on your machine. For Windows, use escaped backslashes such as <code>"C:\\Users\\Alex\\Documents"</code>. An empty list is <code>[]</code>.</p>
+        <pre><code class="config-example" data-file="favourites.json">[
+  "/Users/alex/Documents",
+  "/Users/alex/Projects"
+]</code></pre>
+        <h3 id="state-example">state.json example</h3>
+        <p>Session state is separate from reusable settings. This minimal example restores the active pane, folders, and window size; sorting is also saved here by the app. Keep the app-generated sort values when copying a real session.</p>
+        <pre><code class="config-example" data-file="state.json">{
+  "pane": {
+    "active": "left",
+    "left": { "path": "/Users/alex/Documents" },
+    "right": { "path": "/Users/alex/Downloads" }
+  },
+  "window": { "width": 1100, "height": 700 }
+}</code></pre>
+        <h3 id="move-configuration">Move configuration to another machine</h3>
+        <ol>
+          <li>Quit DualCommander on both machines so pending changes are saved and copied files cannot be overwritten by a running instance.</li>
+          <li>Back up the destination’s <code>.dualcommander</code> folder before replacing anything.</li>
+          <li>Create <code>.dualcommander</code> inside the destination user’s home folder if needed. Copy <code>settings.json</code> there to share appearance and behaviour. Copy <code>favourites.json</code> only if you also want the starred folders.</li>
+          <li>Normally leave the destination’s <code>state.json</code> alone. Copy it only to transfer the last session, then change pane paths for the destination machine.</li>
+          <li>Update favourites and external commands for the destination OS, username, installed apps, and executable paths. Blank reveal, terminal, and editor commands use OS defaults; blank comparison commands disable comparison. macOS commands such as <code>open</code> will not work on Windows or Linux.</li>
+          <li>Start DualCommander and check both panes, favourites, editor, and terminal. If a config error prevents startup, fix the reported file or restore its backup while the app is closed.</li>
+        </ol>
+        <p><strong>Sync tip:</strong> distribute a copy of <code>settings.json</code> with your dotfiles or a private sync folder; install it while DualCommander is closed. There is no live reload or multi-process merge. Avoid simultaneous writes from multiple machines, and keep machine-specific <code>state.json</code> out of shared sync. Review paths and commands before publishing configuration: they can reveal usernames and private folder names.</p>
+        <p>Need help? <a href="https://github.com/dualcommander/dualcommander/issues">Report an issue</a> with your OS, app version, and steps to reproduce. See the <a href="https://github.com/dualcommander/dualcommander#readme">repository reference</a> for configuration details.</p>
+      </section>
+    </main>
+    <footer>DualCommander · <a href="index.html">Home</a> · <a href="https://github.com/dualcommander/dualcommander/blob/main/LICENSE">MIT license</a> · <a href="https://github.com/dualcommander/dualcommander.github.io">Website source</a></footer>
+  </div>
+</body>
+</html>

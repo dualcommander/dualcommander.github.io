@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="DualCommander is a free, open-source two-pane file manager for macOS, Windows, and Linux. Built with Go and Fyne.">
-  <meta name="theme-color" content="#142338">
+  <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="https://dualcommander.github.io/">
   <link rel="icon" type="image/png" href="dualcommander.png">
   <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
   <title>DualCommander — two panes, less friction</title>
   <style>
-    :root { color-scheme: light dark; --bg: #f5f7fb; --card: #fff; --text: #142338; --muted: #46566b; --accent: #1755b8; --line: #d4ddea; }
+    :root { color-scheme: light; --bg: #fff; --card: #fafafa; --text: #222; --muted: #595959; --accent: #333; --line: #ddd; }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--text); font: 1rem/1.65 system-ui, sans-serif; }
     a { color: var(--accent); text-underline-offset: .2em; }
@@ -32,12 +32,12 @@
     .lead { max-width: 46rem; margin: .75rem 0; font-size: 1.125rem; color: var(--muted); }
     .actions { margin-block: 1rem .5rem; }
     .hero .note { margin: .5rem 0 0; }
-    .button { display: inline-block; padding: .7rem 1.2rem; border: 1px solid var(--accent); border-radius: .5rem; font-weight: 650; text-decoration: none; }
+    .button { display: inline-block; padding: .7rem 1.2rem; border: 1px solid var(--accent); border-radius: .25rem; font-weight: 650; text-decoration: none; }
     .primary { background: var(--accent); color: #fff; }
     .note, footer { color: var(--muted); font-size: .9rem; }
     section { padding-block: 2rem; scroll-margin-top: 1rem; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1rem; }
-    article { padding: 1.5rem; border: 1px solid var(--line); border-radius: .75rem; background: var(--card); }
+    article { padding: 1.5rem 0; border-top: 1px solid var(--line); }
     article p:last-child { margin-bottom: 0; }
     figure { margin: 0; }
     figure img { display: block; width: 100%; height: auto; }
@@ -46,12 +46,10 @@
     dl { display: grid; grid-template-columns: max-content 1fr; gap: .8rem 1.5rem; }
     dd { margin: 0; }
     footer { margin-top: 2rem; padding-block: 2rem; border-top: 1px solid var(--line); }
-    @media (prefers-color-scheme: dark) {
-      :root { --bg: #0e1827; --card: #142338; --text: #eef3fc; --muted: #b6c4d9; --accent: #9dc5ff; --line: #34465f; }
-      .primary { background: #245db1; color: #fff; }
-    }
     @media (max-width: 36rem) { .hero { padding-top: 1.5rem; } nav { gap: 1rem; } dl { grid-template-columns: 1fr; } dd { margin-bottom: .5rem; } }
   </style>
+  <link rel="stylesheet" href="theme.css">
+  <script src="theme.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -62,16 +60,18 @@
         <a href="#features">Features</a>
         <a href="#screenshots">Screenshots</a>
         <a href="#download">Download</a>
+        <a href="manual.html">User manual</a>
         <a href="https://github.com/dualcommander/dualcommander">GitHub</a>
       </nav>
+      <label class="theme-picker" hidden>Theme <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
     </header>
     <main id="main">
       <section class="hero" aria-labelledby="title">
         <p class="eyebrow">macOS · Windows · Linux</p>
         <h1 id="title">two panes, less friction</h1>
         <figure id="screenshots">
-          <a href="screenshots/dualcommander.png" aria-label="View full-size DualCommander preview"><img src="screenshots/dualcommander.png" alt="Current DualCommander interface with sample files: light theme behind, dark theme in front, brief view left and detailed view right. Folder navigation, free space, selection totals, and function-key actions are visible; native OS title and menu bars are omitted." width="1380" height="660" fetchpriority="high" decoding="async"></a>
-          <figcaption>Current app-rendered preview: brief and detailed views, in light and dark themes. Click to view full size.</figcaption>
+          <a href="screenshots/dualcommander-light.png" aria-label="View full-size DualCommander preview"><picture><source data-dark media="(prefers-color-scheme: dark)" srcset="screenshots/dualcommander-dark.png"><img src="screenshots/dualcommander-light.png" alt="Current DualCommander interface with sample files, brief view left and detailed view right. Folder navigation, free space, selection totals, and function-key actions are visible; native OS title and menu bars are omitted." width="1200" height="560" fetchpriority="high" decoding="async"></picture></a>
+          <figcaption>Current app-rendered preview: brief and detailed views, matching the site theme. Click to view full size.</figcaption>
         </figure>
         <p class="lead">Move through your files, not through windows. A keyboard-friendly file manager with two panes, light and dark themes, and a view for each side.</p>
         <div class="actions">
@@ -118,7 +118,7 @@
           <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>U</kbd></dt><dd>Swap panes</dd>
           <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>E</kbd></dt><dd>Open the same folder in the other pane</dd>
         </dl>
-        <p>Full controls and archive support: <a href="https://github.com/dualcommander/dualcommander#readme">user guide</a>.</p>
+        <p>Learn the controls with annotated screenshots, settings, and editor/terminal examples in the <a href="manual.html">online user manual</a>.</p>
       </section>
     </main>
     <footer>DualCommander · <a href="https://github.com/dualcommander/dualcommander/blob/main/LICENSE">MIT license</a> · <a href="https://github.com/dualcommander/dualcommander/issues">Report an issue</a> · <a href="https://github.com/dualcommander/dualcommander.github.io">Website source</a></footer>

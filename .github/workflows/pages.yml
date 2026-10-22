@@ -25,6 +25,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check site assets
         run: python3 check.py
+      - name: Check theme switching
+        run: node theme.test.cjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
