@@ -91,7 +91,7 @@ class PageCheck(HTMLParser):
             args = json.loads(self.command)
             assert isinstance(args, list) and args, "Command needs executable"
             assert all(isinstance(arg, str) and arg and "\0" not in arg for arg in args)
-            assert "{path}" in self.command or "{dir}" in self.command or args == ["powershell.exe", "-NoExit"]
+            assert "{path}" in self.command or "{dir}" in self.command or ("{left}" in self.command and "{right}" in self.command) or args == ["powershell.exe", "-NoExit"]
             self.commands.append(args)
             self.command = None
 
@@ -103,7 +103,6 @@ for path in sorted(root.glob("*.html")):
     assert {"dualcommander.png", "favicon.ico", "apple-touch-icon.png"} <= page.icons
     assert page.theme_options == ["system", "light", "dark"], "Missing theme choices"
     assert 'src="theme.js"' in path.read_text() and 'href="theme.css"' in path.read_text()
-    assert len(page.dark_screenshots) == page.screenshots, "Each screenshot needs a dark capture"
     for screenshot in page.dark_screenshots:
         light = screenshot.replace("-dark", "-light" if screenshot.startswith("screenshots/dualcommander-") else "")
         assert (root / screenshot).read_bytes()[16:24] == (root / light).read_bytes()[16:24], "Theme captures need matching dimensions"
@@ -121,14 +120,17 @@ for name, page in pages.items():
 page = pages["index.html"]
 html = (root / "index.html").read_text()
 assert html.split("</h1>", 1)[1].lstrip().startswith('<figure id="screenshots">'), "Screenshot must immediately follow main heading"
-assert page.screenshots == 1, "Expected one theme-matched screenshot"
+assert page.screenshots == 1 and not page.dark_screenshots, "Home preview must stay fixed across themes"
+assert 'src="screenshots/dualcommander.png"' in html, "Home needs overlapping light/dark preview"
 assert "manual.html" in page.links, "Home page must link to manual"
 manual = pages["manual.html"]
 assert manual.contents == manual.headings, "TOC must match section order and subsection hierarchy"
 assert manual.screenshots == 2, "Manual needs pane and settings screenshots"
+assert len(manual.dark_screenshots) == manual.screenshots, "Each manual screenshot needs a dark capture"
 assert manual.hints == 13, "Expected eight pane hints and five settings hints"
 assert len(manual.commands) >= 12, "Missing editor/terminal examples"
 assert ["open", "-na", "ITerm", "{dir}"] in manual.commands
+assert ["/opt/homebrew/bin/meld", "{left}", "{right}"] in manual.commands
 assert set(manual.configs) == {"settings.json", "favourites.json", "state.json"}
 settings = manual.configs["settings.json"]
 assert settings["appearance"] == {"theme": "system", "density": "standard", "fontSize": "medium"}

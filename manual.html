@@ -192,7 +192,7 @@
           <li id="setting-views"><strong>File views</strong>Choose Brief/Detailed separately for left and right. Show hidden files affects both panes; <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> toggles it while browsing.</li>
           <li id="setting-deletion"><strong>File deletion</strong>Move deleted files to Trash is enabled by default. Disabling it makes deletion permanent.</li>
           <li id="setting-archives"><strong>Archives</strong>Browse archives in DualCommander opens supported archives like folders. Turn it off to use the OS-associated application instead. Browsing does not enable archive editing.</li>
-          <li id="setting-external"><strong>External applications</strong>Override Show in file manager, Open folder in terminal, and Edit file (F4); leave these fields blank to restore their OS defaults. Compare files uses the cursor file in each pane; Compare folder contents uses the current pane folders. Both comparison fields require a configured tool, such as <code>["meld", "{left}", "{right}"]</code>; blank disables comparison. Configure your tool’s flags for recursive folder-content comparison. See the command rules and examples below.</li>
+          <li id="setting-external"><strong>External applications</strong>Override Show in file manager, Open folder in terminal, and Edit file (F4); leave these fields blank to restore their OS defaults. Compare files uses the cursor file in each pane; Compare folder contents uses the current pane folders. Both comparison fields require a configured tool, such as <code>["meld", "{left}", "{right}"]</code>; blank disables comparison. This example requires Meld on DualCommander’s <code>PATH</code>; if it works only in Terminal, use its absolute executable path as described in <a href="#command-troubleshooting">Troubleshooting external commands</a>. Configure your tool’s flags for recursive folder-content comparison. See the command rules and examples below.</li>
         </ol>
       </section>
       <section id="command-format" aria-labelledby="commands-title">
@@ -259,6 +259,12 @@
           <li><strong>Wrong folder:</strong> check which pane is active and whether the terminal accepts the directory flag. Custom startup profiles can override the starting folder.</li>
           <li><strong>Restore defaults:</strong> clear the entire field. Reveal, terminal, and editor fields use the OS default; comparison fields become disabled. No restart is needed.</li>
         </ul>
+        <p><strong>macOS: command works in Terminal, but not in DualCommander.</strong> Apps launched from Finder or the Dock do not necessarily inherit your shell’s <code>PATH</code> or shell startup files. An error such as <code>exec: "meld": executable file not found in $PATH</code> can occur even when Meld is installed and works in Terminal. This also applies to Homebrew-installed editors, terminals, and other comparison tools.</p>
+        <p>In Terminal, find the executable:</p>
+        <pre><code>command -v meld</code></pre>
+        <p>Copy the absolute path returned, then replace only the first string in the comparison command. For example, if the result is <code>/opt/homebrew/bin/meld</code>, paste this into <strong>Compare files</strong> or <strong>Compare folder contents</strong>:</p>
+        <pre><code class="command-example">["/opt/homebrew/bin/meld", "{left}", "{right}"]</code></pre>
+        <p>Homebrew commonly uses <code>/opt/homebrew/bin/meld</code> on Apple Silicon and <code>/usr/local/bin/meld</code> on Intel Macs, but use your actual result, not an assumed location. If <code>command -v</code> returns nothing, install the tool or locate its executable first. If it reports a shell alias or function, use the actual executable instead. Do not paste <code>command -v meld</code>, <code>$(command -v meld)</code>, <code>~</code>, or <code>$HOME</code> into the JSON command: DualCommander does not run a shell or expand them. Changes save automatically; retry comparison without restarting.</p>
       </section>
       <section id="archives" aria-labelledby="archives-title">
         <h2 id="archives-title">Browse archives safely</h2>
