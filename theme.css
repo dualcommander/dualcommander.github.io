@@ -1,7 +1,7 @@
-:root { color-scheme: light; --bg: #fff; --card: #fafafa; --text: #222; --muted: #595959; --accent: #333; --line: #ddd; }
-:root[data-theme="dark"] { color-scheme: dark; --bg: #181818; --card: #222; --text: #eee; --muted: #bbb; --accent: #ddd; --line: #444; }
+:root { color-scheme: light; --bg: #fff; --card: #fafafa; --text: #4b4b4b; --muted: #6b6b6b; --accent: #505050; --line: #ddd; }
+:root[data-theme="dark"] { color-scheme: dark; --bg: #181818; --card: #222; --text: #c4c4c4; --muted: #aaa; --accent: #bfbfbf; --line: #444; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { color-scheme: dark; --bg: #181818; --card: #222; --text: #eee; --muted: #bbb; --accent: #ddd; --line: #444; }
+  :root:not([data-theme="light"]) { color-scheme: dark; --bg: #181818; --card: #222; --text: #c4c4c4; --muted: #aaa; --accent: #bfbfbf; --line: #444; }
 }
 .theme-picker { display: inline-flex; align-items: center; gap: .5rem; font-size: .9rem; }
 .theme-picker[hidden] { display: none; }

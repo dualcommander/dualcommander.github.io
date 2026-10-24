@@ -23,8 +23,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Check site assets
-        run: python3 check.py
+      - name: Validate HTML and CSS
+        run: docker run --rm -v "$PWD:/site:ro" -w /site ghcr.io/validator/validator:latest vnu --Werror --also-check-css *.html *.css
+      - name: Check JavaScript syntax
+        run: node --check theme.js
       - name: Check theme switching
         run: node theme.test.cjs
       - uses: actions/configure-pages@v5
