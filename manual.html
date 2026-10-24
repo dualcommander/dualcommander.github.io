@@ -66,15 +66,20 @@
   <div class="wrap">
     <header>
       <a class="brand" href="index.html"><img src="dualcommander.png" alt="" width="40" height="40">DualCommander</a>
-      <nav aria-label="Main navigation"><a href="index.html#download">Download</a><a href="manual.html" aria-current="page">User manual</a><a href="https://github.com/dualcommander/dualcommander">GitHub</a></nav>
+      <nav aria-label="Main navigation">
+        <a href="index.html#download">Download</a>
+        <a href="manual.html" aria-current="page">User manual</a>
+        <a href="https://github.com/dualcommander/dualcommander/issues/new/choose"><strong>Report a bug / Request a feature</strong></a>
+        <a href="https://github.com/dualcommander/dualcommander">GitHub</a>
+      </nav>
       <label class="theme-picker" hidden>Theme <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
     </header>
     <main id="main">
       <h1>User manual</h1>
       <p class="lead">Browse in one pane, choose a destination in the other. This guide covers everyday file management, settings, and connecting your favourite editor and terminal.</p>
       <p><strong>Shortcut key:</strong> <kbd>Mod</kbd> means <kbd>Cmd</kbd> on macOS and <kbd>Ctrl</kbd> on Windows/Linux. If your keyboard uses function keys for media controls, you may need <kbd>Fn</kbd> too.</p>
-      <nav class="contents" aria-label="On this page">
-        <strong>On this page</strong>
+      <nav class="contents" aria-label="Contents">
+        <strong>Contents</strong>
         <ul>
           <li><a href="#quick-start">Your first copy</a></li>
           <li><a href="#panes">Pane tour</a></li>
@@ -330,10 +335,10 @@
           <li>Start DualCommander and check both panes, favourites, editor, and terminal. If a config error prevents startup, fix the reported file or restore its backup while the app is closed.</li>
         </ol>
         <p><strong>Sync tip:</strong> distribute a copy of <code>settings.json</code> with your dotfiles or a private sync folder; install it while DualCommander is closed. There is no live reload or multi-process merge. Avoid simultaneous writes from multiple machines, and keep machine-specific <code>state.json</code> out of shared sync. Review paths and commands before publishing configuration: they can reveal usernames and private folder names.</p>
-        <p>Need help? <a href="https://github.com/dualcommander/dualcommander/issues">Report an issue</a> with your OS, app version, and steps to reproduce. See the <a href="https://github.com/dualcommander/dualcommander#readme">repository reference</a> for configuration details.</p>
+        <p>Found a bug or have an idea? <a href="https://github.com/dualcommander/dualcommander/issues/new/choose">Report a bug or request a feature</a> on GitHub. Search existing issues first, then choose the appropriate form.</p>
       </section>
     </main>
-    <footer>DualCommander · <a href="index.html">Home</a> · <a href="https://github.com/dualcommander/dualcommander/blob/main/LICENSE">MIT license</a> · <a href="https://github.com/dualcommander/dualcommander.github.io">Website source</a></footer>
+    <footer><a href="https://github.com/dualcommander/dualcommander/blob/main/LICENSE">MIT license</a> · <a href="https://github.com/dualcommander/dualcommander.github.io">Website source</a></footer>
   </div>
 </body>
 </html>

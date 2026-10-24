@@ -57,10 +57,9 @@
     <header>
       <a class="brand" href="./"><img src="dualcommander.png" alt="" width="40" height="40">DualCommander</a>
       <nav aria-label="Main navigation">
-        <a href="#features">Features</a>
-        <a href="#screenshots">Screenshots</a>
         <a href="#download">Download</a>
         <a href="manual.html">User manual</a>
+        <a href="https://github.com/dualcommander/dualcommander/issues/new/choose"><strong>Report a bug / Request a feature</strong></a>
         <a href="https://github.com/dualcommander/dualcommander">GitHub</a>
       </nav>
       <label class="theme-picker" hidden>Theme <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
@@ -92,7 +91,11 @@
       </section>
       <section id="download" aria-labelledby="download-title">
         <h2 id="download-title">Get DualCommander</h2>
-        <p>Find published packages on <a href="https://github.com/dualcommander/dualcommander/releases">GitHub Releases</a>. If no release is available yet, check successful <a href="https://github.com/dualcommander/dualcommander/actions/workflows/build.yml">GitHub Actions builds</a> for downloadable artifacts (GitHub sign-in required).</p>
+        <p><a class="button primary" href="https://github.com/dualcommander/dualcommander/releases">Download released version</a></p>
+        <p class="note">Choose a package for your platform on GitHub Releases.</p>
+        <p class="note"><a href="https://github.com/dualcommander/dualcommander/actions/workflows/build.yml">Unreleased builds</a> — try changes not yet released; may be unstable. Download artifacts from successful builds (GitHub sign-in required).<br>
+          <a href="https://github.com/dualcommander/dualcommander/blob/main/CONTRIBUTING.md">Build locally</a> — compile from source using the development guide.</p>
+        <h3>Platform requirements</h3>
         <ul>
           <li><strong>macOS:</strong> Apple Silicon (arm64) and Intel (amd64), as DMG or ZIP. Open the DMG and drag DualCommander into Applications.</li>
           <li><strong>Windows:</strong> amd64.</li>
@@ -100,7 +103,6 @@
         </ul>
         <p class="note">Linux compatibility targets include Debian 12+, Ubuntu 22.04+, Mint 21+, and compatible Fedora/RHEL-family releases, not RHEL 9 or older. These are targets, not a tested distro matrix. See the <a href="https://github.com/dualcommander/dualcommander#download">installation guide</a> for package commands and requirements.</p>
         <p class="note">macOS and Windows packages are unsigned and not notarized. Your OS may show security warnings. Download only from the project repository and review those warnings before running.</p>
-        <p>Prefer building locally? Follow the <a href="https://github.com/dualcommander/dualcommander/blob/main/CONTRIBUTING.md">development guide</a>.</p>
       </section>
       <section aria-labelledby="keys-title">
         <h2 id="keys-title">A few keys to get moving</h2>
@@ -121,7 +123,7 @@
         <p>Learn the controls with annotated screenshots, settings, and editor/terminal examples in the <a href="manual.html">online user manual</a>.</p>
       </section>
     </main>
-    <footer>DualCommander · <a href="https://github.com/dualcommander/dualcommander/blob/main/LICENSE">MIT license</a> · <a href="https://github.com/dualcommander/dualcommander/issues">Report an issue</a> · <a href="https://github.com/dualcommander/dualcommander.github.io">Website source</a></footer>
+    <footer><a href="https://github.com/dualcommander/dualcommander/blob/main/LICENSE">MIT license</a> · <a href="https://github.com/dualcommander/dualcommander.github.io">Website source</a></footer>
   </div>
 </body>
 </html>
