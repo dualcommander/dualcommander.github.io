@@ -102,7 +102,7 @@
               <li><a href="#command-troubleshooting">Troubleshooting external commands</a></li>
             </ul>
           </li>
-          <li><a href="#archives">Browse archives safely</a></li>
+          <li><a href="#archives">Browse, extract, and create archives</a></li>
           <li><a href="#saved-settings">Saved settings and sharing configuration</a>
             <ul>
               <li><a href="#settings-example">settings.json example</a></li>
@@ -143,7 +143,7 @@
           <figcaption>App-rendered sample on macOS; icons, paths, and native menus vary by OS. Select a numbered hint, or read the matching list. Small screen? Scroll the screenshot sideways.</figcaption>
         </figure>
         <ol class="hints">
-          <li id="pane-volume"><strong>Volumes and free space</strong>The top-left dropdown selects a mounted drive or volume. The top-right value shows free space for that pane’s filesystem.</li>
+          <li id="pane-volume"><strong>Volumes and disk space</strong>The top-left dropdown selects a mounted drive or volume. The top-right value shows free space for that pane’s filesystem by default; turn off Show free disk space in Settings to show used space instead.</li>
           <li id="pane-path"><strong>Navigation and path</strong>Home opens your home folder; the up arrow goes to the parent. Enter a path in the field and press <kbd>Enter</kbd>. The <code>..</code> row, <kbd>Backspace</kbd>, or <kbd>Mod</kbd>+<kbd>↑</kbd> also goes up.</li>
           <li id="pane-favourites"><strong>Favourite folders</strong>The star adds/removes the current folder. The adjacent dropdown opens saved favourites, shared between both panes.</li>
           <li id="pane-view"><strong>Brief or Detailed</strong>The view button toggles this pane’s layout. Its icon shows the view you can switch to. Brief emphasises names; Detailed also shows size, modified date, and attributes. Use <kbd>Mod</kbd>+<kbd>1</kbd> / <kbd>2</kbd> for the active pane.</li>
@@ -153,6 +153,7 @@
           <li id="pane-actions"><strong>Action bar</strong>Buttons act on the active pane, just like their F-keys. Use Edit, Copy, Move, MkDir, Delete, Terminal, or Quit. Copy/move default to the other pane’s folder.</li>
         </ol>
         <p><kbd>Mod</kbd>+<kbd>U</kbd> swaps panes; <kbd>Mod</kbd>+<kbd>E</kbd> opens the active folder in the other pane. Folder changes refresh automatically; <kbd>Ctrl</kbd>+<kbd>R</kbd> (also <kbd>Cmd</kbd>+<kbd>R</kbd> on macOS) reloads while preserving cursor and marks.</p>
+        <p>Each pane keeps its own folder history for the current session. Use <kbd>Mod</kbd>+<kbd>←</kbd> / <kbd>→</kbd> or your mouse’s back / forward buttons to navigate the active pane’s history.</p>
       </section>
       <section id="file-actions" aria-labelledby="actions-title">
         <h2 id="actions-title">Everyday file actions</h2>
@@ -164,11 +165,13 @@
               <tr><th scope="row">Edit</th><td><kbd>F4</kbd></td><td>Open the cursor file in your configured external editor. No built-in editor.</td></tr>
               <tr><th scope="row">New file</th><td><kbd>Shift</kbd>+<kbd>F4</kbd></td><td>Enter a name; create and select the file. Press F4 afterwards to edit it.</td></tr>
               <tr><th scope="row">Copy / move</th><td><kbd>F5</kbd> / <kbd>F6</kbd></td><td>Check the target in the dialog. If an existing file conflicts, review the overwrite choices.</td></tr>
+              <tr><th scope="row">Clipboard copy / cut / paste</th><td><kbd>Mod</kbd>+<kbd>C</kbd> / <kbd>X</kbd> / <kbd>V</kbd></td><td>Copy marked files, or the cursor item, and paste into the active folder. Copy/paste exchanges files with the OS file manager; cut stays within DualCommander. Focus a text field to use normal text clipboard shortcuts instead.</td></tr>
+              <tr><th scope="row">Create archive</th><td><kbd>Alt</kbd>+<kbd>F5</kbd></td><td>Pack selected files and folders into a new archive in the other pane’s folder. See <a href="#archives">archive formats and password options</a>.</td></tr>
               <tr><th scope="row">Rename</th><td><kbd>F2</kbd> / <kbd>Shift</kbd>+<kbd>F6</kbd></td><td>Rename the cursor item, not all marks. F2 on <code>..</code> selects the current path for editing.</td></tr>
               <tr><th scope="row">New folder</th><td><kbd>F7</kbd></td><td>Create a folder in the active pane. <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> also works.</td></tr>
               <tr><th scope="row">Delete</th><td><kbd>F8</kbd> / <kbd>Delete</kbd></td><td>Review the confirmation. Uses Trash/Recycle Bin when enabled in Settings.</td></tr>
               <tr><th scope="row">Mark / unmark all</th><td><kbd>Mod</kbd>+<kbd>A</kbd> / <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></td><td>Choose all items or clear the active pane’s marks.</td></tr>
-              <tr><th scope="row">Find files</th><td><kbd>Mod</kbd>+<kbd>F</kbd> / <kbd>Alt</kbd>+<kbd>F7</kbd></td><td>Search by name or content from the active folder.</td></tr>
+              <tr><th scope="row">Find files</th><td><kbd>Mod</kbd>+<kbd>F</kbd> / <kbd>Alt</kbd>+<kbd>F7</kbd></td><td>Search by name or content from the active folder. Progress shows the current search path; cancel to stop the search.</td></tr>
               <tr><th scope="row">Reveal</th><td><kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd></td><td>Show the selection in Finder, Explorer, or your file manager; use the current folder when nothing is selected.</td></tr>
               <tr><th scope="row">Terminal</th><td><kbd>F9</kbd></td><td>Open a terminal in the active folder, not the folder under the cursor.</td></tr>
             </tbody>
@@ -195,11 +198,12 @@
         </figure>
         <ol class="hints">
           <li id="setting-appearance"><strong>Appearance</strong>Theme follows the system or uses light/dark. Density chooses standard or compact file rows. Font size adjusts file-list text; use larger text for readability or compact rows to fit more files.</li>
-          <li id="setting-views"><strong>File views</strong>Choose Brief/Detailed separately for left and right. Show hidden files affects both panes; <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> toggles it while browsing.</li>
+          <li id="setting-views"><strong>File views</strong>Choose Brief/Detailed separately for left and right. Show hidden files affects both panes; <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> toggles it while browsing. Show free disk space switches the volume indicator between free and used space.</li>
           <li id="setting-deletion"><strong>File deletion</strong>Move deleted files to Trash is enabled by default. Disabling it makes deletion permanent.</li>
           <li id="setting-archives"><strong>Archives</strong>Browse archives in DualCommander opens supported archives like folders. Turn it off to use the OS-associated application instead. Browsing does not enable archive editing.</li>
           <li id="setting-external"><strong>External applications</strong>Override Show in file manager, Open folder in terminal, and Edit file (F4); leave these fields blank to restore their OS defaults. Compare files uses the cursor file in each pane; Compare folder contents uses the current pane folders. Both comparison fields require a configured tool, such as <code>["meld", "{left}", "{right}"]</code>; blank disables comparison. This example requires Meld on DualCommander’s <code>PATH</code>; if it works only in Terminal, use its absolute executable path as described in <a href="#command-troubleshooting">Troubleshooting external commands</a>. Configure your tool’s flags for recursive folder-content comparison. See the command rules and examples below.</li>
         </ol>
+        <p><strong>Language:</strong> choose System or one of 30 interface languages in Settings, then restart DualCommander. Fyne’s built-in controls still follow the OS locale. The screenshot above may not show newer settings.</p>
       </section>
       <section id="command-format" aria-labelledby="commands-title">
         <h2 id="commands-title">Custom command rules</h2>
@@ -273,17 +277,23 @@
         <p>Homebrew commonly uses <code>/opt/homebrew/bin/meld</code> on Apple Silicon and <code>/usr/local/bin/meld</code> on Intel Macs, but use your actual result, not an assumed location. If <code>command -v</code> returns nothing, install the tool or locate its executable first. If it reports a shell alias or function, use the actual executable instead. Do not paste <code>command -v meld</code>, <code>$(command -v meld)</code>, <code>~</code>, or <code>$HOME</code> into the JSON command: DualCommander does not run a shell or expand them. Changes save automatically; retry comparison without restarting.</p>
       </section>
       <section id="archives" aria-labelledby="archives-title">
-        <h2 id="archives-title">Browse archives safely</h2>
-        <p>With archive browsing enabled, <kbd>Enter</kbd> or double-click opens ZIP, TAR, 7z, RAR, compressed TAR, and supported single-file compression formats such as gzip, bzip2, XZ, and Zstandard. Password-protected ZIP, 7z, and RAR are supported.</p>
-        <p class="callout"><strong>Archives are read-only.</strong> Copy/move involving archive folders is not supported; use an external extraction tool. Nested archives are not browsed in-pane. Opening a member creates a temporary copy (up to 256 MiB), removed on exit. Editing that copy does not update the archive.</p>
-        <p>DEB and RPM packages open with their OS-associated app, which may launch an installer. Use an external tool if you only want to inspect them.</p>
+        <h2 id="archives-title">Browse, extract, and create archives</h2>
+        <h3>Browse</h3>
+        <p>With archive browsing enabled, <kbd>Enter</kbd> or double-click opens ZIP/ZIPX, TAR, 7z, RAR, compressed TAR, and supported single-file compression formats such as gzip, bzip2, XZ, LZMA, and Zstandard. CPIO (newc/CRC), RPM CPIO payloads, and DEB data payloads can also be browsed without launching an installer. ZIPX supports Store, Deflate, BZip2, LZMA, XZ, and Zstandard; other codecs report unsupported compression. Password-protected ZIP, 7z, and RAR are supported.</p>
+        <p class="callout"><strong>Existing archives are read-only.</strong> Moving, deleting, renaming, or copying files into an archive is not supported. Nested archives are not browsed in-pane. Opening a member creates a temporary copy (up to 256 MiB), removed on exit. Editing that copy does not update the archive.</p>
+        <h3>Extract selected items</h3>
+        <p>Open the archive in one pane and a normal destination folder in the other. Mark the archive files or folders you want, then press <kbd>F5</kbd>. Check the destination and confirm <strong>Copy</strong>. Extraction runs in the background with progress, cancellation, and the usual overwrite choices. Password-protected contents prompt when needed.</p>
+        <h3>Create a new archive</h3>
+        <p>Select files or folders in a normal filesystem pane and open the destination folder in the other pane. Choose <strong>File → Create Archive…</strong> or press <kbd>Alt</kbd>+<kbd>F5</kbd>. Enter a name and choose ZIP, TAR, TAR.GZ, TAR.BZ2, TAR.XZ, or TAR.ZST, then confirm <strong>Create</strong>. Both panes must be outside archives.</p>
+        <p>ZIP optionally supports a password with confirmation, using AES-256. File names remain visible, and some archive tools cannot open encrypted ZIP files. Other creation formats do not support passwords. Existing files are never replaced; choose a new name. Creation runs in the background, and cancellation or failure removes its partial archive.</p>
+        <p>Archive creation rejects symbolic links and special files. Choose a destination outside any selected folder.</p>
       </section>
       <section id="saved-settings" aria-labelledby="saved-title">
         <h2 id="saved-title">Saved settings and sharing configuration</h2>
         <p>DualCommander stores configuration under <code>~/.dualcommander/</code> in your home folder (on Windows, normally <code>C:\Users\YourName\.dualcommander\</code>):</p>
         <ul>
-          <li><code>settings.json</code>: appearance, pane views, hidden files, deletion/archive behaviour, and external commands.</li>
-          <li><code>state.json</code>: pane paths, active pane, sorting, and window size.</li>
+          <li><code>settings.json</code>: appearance, language, pane views, hidden files, disk-space display, deletion/archive behaviour, and external commands.</li>
+          <li><code>state.json</code>: pane paths, active pane, divider position, sorting, and window size. Folder history is not saved.</li>
           <li><code>favourites.json</code>: shared starred folder paths.</li>
         </ul>
         <p>Use the dialog for routine changes. Close DualCommander before editing these files by hand; manual changes load on the next start. Invalid JSON or wrong value types stop startup without overwriting the file.</p>

@@ -71,7 +71,6 @@
         <h1 id="title">two panes, less friction</h1>
         <figure id="screenshots">
           <a href="screenshots/dualcommander.png" aria-label="View full-size DualCommander preview"><img src="screenshots/dualcommander.png" alt="Overlapping light and dark DualCommander previews with sample files, brief view left and detailed view right. Folder navigation, free space, selection totals, and function-key actions are visible; native OS title and menu bars are omitted." width="1380" height="660" fetchpriority="high" decoding="async"></a>
-          <figcaption>Current app-rendered previews: overlapping light and dark themes, with brief and detailed views. Click to view full size.</figcaption>
         </figure>
         <p class="lead">Move through your files, not through windows. A keyboard-friendly file manager with two panes, light and dark themes, and a view for each side.</p>
         <div class="actions">
@@ -83,11 +82,11 @@
         <h2 id="features-title">Familiar tools. Focused workflow.</h2>
         <div class="grid">
           <article><h3>Files side by side</h3><p>Copy, move, rename, and delete across two panes, with background progress and cancellation. Compare source and target details before choosing Skip, Overwrite, or applying either choice to all conflicts in that operation. Deletions use Trash or Recycle Bin by default.</p></article>
-          <article><h3>Keyboard first</h3><p>Switch panes with Tab. Copy with F5, move with F6, create files with Shift+F4, and create folders with F7. Mark files individually or as a range; swap panes or open the same folder on both sides.</p></article>
-          <article><h3>Look inside archives</h3><p>Browse ZIP, TAR, 7z, RAR, and compressed files, including password-protected ZIP, 7z, and RAR. Browsing is read-only; nested archives are not browsed in-pane. Opening a member creates a temporary copy (up to 256 MiB), removed on exit. Edits do not update the archive.</p></article>
-          <article><h3>At home on your OS</h3><p>Open files in your default apps, edit in an external text editor, reveal files, copy paths, or launch a terminal in the current folder. Right-click for Open With and Get Info on macOS, or Open With and Properties on Windows.</p></article>
-          <article><h3>Your view, remembered</h3><p>Brief and detailed views, sorting, shared favourite folders, light and dark themes, adjustable density, and font sizes. Pane paths and window state persist.</p></article>
-          <article><h3>Stay up to date</h3><p>Folder changes refresh automatically through native OS notifications. Find files by name or content, and switch between mounted volumes.</p></article>
+          <article><h3>Keyboard first</h3><p>Switch panes with Tab. Copy with F5, move with F6, create files with Shift+F4, and create folders with F7. Mark files individually or as a range; navigate back and forward through each pane’s folder history with Cmd/Ctrl+Left and Right.</p></article>
+          <article><h3>Browse, extract, and create archives</h3><p>Browse ZIP/ZIPX, TAR, 7z, RAR, compressed files, and CPIO, RPM, and DEB contents. Copy selected archive files or folders out with F5. Create ZIP, TAR, TAR.GZ, TAR.BZ2, TAR.XZ, or TAR.ZST with Alt+F5, with optional AES-256 passwords for ZIP. Existing archives stay read-only.</p></article>
+          <article><h3>At home on your OS</h3><p>Copy and paste files between DualCommander and your OS file manager. Open files in default apps, edit externally, reveal files, or launch a terminal. Configure external tools to compare files or folder contents. Right-click for Open With and Get Info on macOS, or Open With and Properties on Windows.</p></article>
+          <article><h3>Your view, remembered</h3><p>Brief and detailed views, sorting, shared favourite folders, light and dark themes, adjustable density, and font sizes. Pane paths, divider position, and window state persist. Choose from 30 interface languages in Settings; restart to apply.</p></article>
+          <article><h3>Find files, keep browsing</h3><p>Search by name or content, follow the current search path, and cancel when needed. Folder changes refresh automatically through native OS notifications. Switch mounted volumes, swap panes, or open the same folder on both sides.</p></article>
         </div>
       </section>
       <section id="download" aria-labelledby="download-title">
@@ -100,11 +99,11 @@
         <h3>Platform requirements</h3>
         <ul>
           <li><strong>macOS:</strong> Apple Silicon (arm64) and Intel (amd64), as DMG or ZIP. Open the DMG and drag DualCommander into Applications.</li>
-          <li><strong>Windows:</strong> amd64.</li>
-          <li><strong>Linux:</strong> amd64, as DEB, RPM, or tar.xz. Requires glibc 2.35+ and a desktop session with OpenGL support; system graphics libraries are not bundled.</li>
+          <li><strong>Windows:</strong> x64 (amd64) and ARM64. For ZIP downloads, extract the entire package and run the top-level DualCommander.exe; keep the bundled software rendering files.</li>
+          <li><strong>Linux:</strong> amd64 and arm64, as DEB, RPM, Arch Linux (.pkg.tar.zst), tar.xz, or Snap. Native packages require a compatible glibc and a desktop session with OpenGL support; system graphics libraries are not bundled.</li>
         </ul>
-        <p class="note">Linux compatibility targets include Debian 12+, Ubuntu 22.04+, Mint 21+, and compatible Fedora/RHEL-family releases, not RHEL 9 or older. These are targets, not a tested distro matrix. See the <a href="https://github.com/dualcommander/dualcommander#download">installation guide</a> for package commands and requirements.</p>
-        <p class="note">macOS packages from GitHub Releases are unsigned and not notarized; Windows packages from GitHub Releases are unsigned. Your OS may show security warnings. Download only from the project repository or the Microsoft Store listing above, and review those warnings before running.</p>
+        <p class="note">Linux package dependencies reflect the build runner’s glibc version; older distributions may need a local build. See the <a href="https://github.com/dualcommander/dualcommander/blob/main/CONTRIBUTING.md#snap-installation">Snap installation guide</a> for installation and trust requirements.</p>
+        <p class="note">Signing depends on the release configuration; do not assume GitHub downloads are signed or notarized. Your OS may show security warnings. Download only from the project repository or the Microsoft Store listing above, and review those warnings before running.</p>
       </section>
       <section aria-labelledby="keys-title">
         <h2 id="keys-title">A few keys to get moving</h2>
@@ -115,6 +114,9 @@
           <dt><kbd>F4</kbd></dt><dd>Edit with an external text editor</dd>
           <dt><kbd>Shift</kbd> + <kbd>F4</kbd></dt><dd>Create and select a new file</dd>
           <dt><kbd>F5</kbd> / <kbd>F6</kbd></dt><dd>Copy / move</dd>
+          <dt><kbd>Alt</kbd> + <kbd>F5</kbd></dt><dd>Create an archive in the other pane’s folder</dd>
+          <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>C</kbd> / <kbd>X</kbd> / <kbd>V</kbd></dt><dd>Copy / cut / paste files (cut stays within DualCommander)</dd>
+          <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>←</kbd> / <kbd>→</kbd></dt><dd>Back / forward in the active pane’s folder history</dd>
           <dt><kbd>F2</kbd> / <kbd>Shift</kbd> + <kbd>F6</kbd></dt><dd>Rename cursor item (F2 on .. selects the current path)</dd>
           <dt><kbd>F7</kbd> / <kbd>F8</kbd></dt><dd>Create a folder / delete</dd>
           <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>F</kbd></dt><dd>Find files (Cmd on macOS, Ctrl on Windows and Linux)</dd>
