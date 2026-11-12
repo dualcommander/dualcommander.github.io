@@ -153,6 +153,7 @@
           <li id="pane-actions"><strong>Action bar</strong>Buttons act on the active pane, just like their F-keys. Use Edit, Copy, Move, MkDir, Delete, Terminal, or Quit. Copy/move default to the other pane’s folder.</li>
         </ol>
         <p><kbd>Mod</kbd>+<kbd>U</kbd> swaps panes; <kbd>Mod</kbd>+<kbd>E</kbd> opens the active folder in the other pane. Folder changes refresh automatically; <kbd>Ctrl</kbd>+<kbd>R</kbd> (also <kbd>Cmd</kbd>+<kbd>R</kbd> on macOS) reloads while preserving cursor and marks.</p>
+        <p>Move the cursor with the arrow keys, <kbd>Home</kbd> / <kbd>End</kbd> for the first or last item, and <kbd>PageUp</kbd> / <kbd>PageDown</kbd> one screen at a time. Holding <kbd>Shift</kbd> while moving marks the items the cursor passes over. Typing letters jumps to the first name that starts with them; <kbd>Escape</kbd> clears the typed text, and <kbd>Backspace</kbd> removes its last letter.</p>
         <p>Each pane keeps its own folder history for the current session. Use <kbd>Mod</kbd>+<kbd>←</kbd> / <kbd>→</kbd> or your mouse’s back / forward buttons to navigate the active pane’s history.</p>
       </section>
       <section id="file-actions" aria-labelledby="actions-title">
@@ -161,16 +162,19 @@
           <table>
             <thead><tr><th scope="col">Action</th><th scope="col">Shortcut</th><th scope="col">How it works</th></tr></thead>
             <tbody>
-              <tr><th scope="row">Open</th><td><kbd>Enter</kbd></td><td>Enter a folder or supported archive; open other files with the OS-associated application.</td></tr>
+              <tr><th scope="row">Open</th><td><kbd>Enter</kbd> / <kbd>Mod</kbd>+<kbd>O</kbd></td><td>Enter a folder or supported archive; open other files with the OS-associated application.</td></tr>
+              <tr><th scope="row">Home folder</th><td><kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd></td><td>Open your home folder in the active pane.</td></tr>
+              <tr><th scope="row">Compare files / folders</th><td><kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>D</kbd> / <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd></td><td>Compare the cursor files in both panes, or the two folder contents. Needs a comparison command set in Settings.</td></tr>
               <tr><th scope="row">Edit</th><td><kbd>F4</kbd></td><td>Open the cursor file in your configured external editor. No built-in editor.</td></tr>
               <tr><th scope="row">New file</th><td><kbd>Shift</kbd>+<kbd>F4</kbd></td><td>Enter a name; create and select the file. Press F4 afterwards to edit it.</td></tr>
               <tr><th scope="row">Copy / move</th><td><kbd>F5</kbd> / <kbd>F6</kbd></td><td>Check the target in the dialog. If an existing file conflicts, review the overwrite choices.</td></tr>
               <tr><th scope="row">Clipboard copy / cut / paste</th><td><kbd>Mod</kbd>+<kbd>C</kbd> / <kbd>X</kbd> / <kbd>V</kbd></td><td>Copy marked files, or the cursor item, and paste into the active folder. Copy/paste exchanges files with the OS file manager; cut stays within DualCommander. Focus a text field to use normal text clipboard shortcuts instead.</td></tr>
               <tr><th scope="row">Create archive</th><td><kbd>Alt</kbd>+<kbd>F5</kbd></td><td>Pack selected files and folders into a new archive in the other pane’s folder. See <a href="#archives">archive formats and password options</a>.</td></tr>
               <tr><th scope="row">Rename</th><td><kbd>F2</kbd> / <kbd>Shift</kbd>+<kbd>F6</kbd></td><td>Rename the cursor item, not all marks. F2 on <code>..</code> selects the current path for editing.</td></tr>
-              <tr><th scope="row">New folder</th><td><kbd>F7</kbd></td><td>Create a folder in the active pane. <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> also works.</td></tr>
-              <tr><th scope="row">Delete</th><td><kbd>F8</kbd> / <kbd>Delete</kbd></td><td>Review the confirmation. Uses Trash/Recycle Bin when enabled in Settings.</td></tr>
+              <tr><th scope="row">New folder</th><td><kbd>F7</kbd></td><td>Create a folder in the active pane.</td></tr>
+              <tr><th scope="row">Delete</th><td><kbd>F8</kbd> / <kbd>Delete</kbd> / <kbd>Mod</kbd>+<kbd>Backspace</kbd></td><td>Review the confirmation. Uses Trash/Recycle Bin when enabled in Settings.</td></tr>
               <tr><th scope="row">Mark / unmark all</th><td><kbd>Mod</kbd>+<kbd>A</kbd> / <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></td><td>Choose all items or clear the active pane’s marks.</td></tr>
+              <tr><th scope="row">Select group</th><td><kbd>Mod</kbd>+<kbd>G</kbd></td><td>Enter text to match in file names; a name matches when it contains the text. Matching ignores case by default; turn on <em>Match case</em> to distinguish case, or <em>Regular expression</em> to use Go regexp syntax. Existing marks are kept and <code>..</code> is never marked.</td></tr>
               <tr><th scope="row">Find files</th><td><kbd>Mod</kbd>+<kbd>F</kbd> / <kbd>Alt</kbd>+<kbd>F7</kbd></td><td>Search by name or content from the active folder. Progress shows the current search path; cancel to stop the search.</td></tr>
               <tr><th scope="row">Reveal</th><td><kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd></td><td>Show the selection in Finder, Explorer, or your file manager; use the current folder when nothing is selected.</td></tr>
               <tr><th scope="row">Terminal</th><td><kbd>F9</kbd></td><td>Open a terminal in the active folder, not the folder under the cursor.</td></tr>
