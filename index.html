@@ -72,7 +72,7 @@
         <figure id="screenshots">
           <a href="screenshots/dualcommander.png" aria-label="View full-size DualCommander preview"><img src="screenshots/dualcommander.png" alt="Overlapping light and dark DualCommander previews with sample files, brief view left and detailed view right. Folder navigation, free space, selection totals, and function-key actions are visible; native OS title and menu bars are omitted." width="1380" height="660" fetchpriority="high" decoding="async"></a>
         </figure>
-        <p class="lead">Move through your files, not through windows. A keyboard-friendly file manager with two panes, light and dark themes, and a view for each side.</p>
+        <p class="lead">Move through your files, not through windows. A keyboard-friendly two-pane file manager with background file operations, flexible search, archive browsing, and your choice of external tools.</p>
         <div class="actions">
           <a class="button primary" href="#download">Get DualCommander</a>
           <a class="button" href="https://github.com/dualcommander/dualcommander">Explore the source</a>
@@ -83,10 +83,11 @@
         <div class="grid">
           <article><h3>Files side by side</h3><p>Copy, move, rename, and delete across two panes, with background progress and cancellation. Compare source and target details before choosing Skip, Overwrite, or applying either choice to all conflicts in that operation. Deletions use Trash or Recycle Bin by default.</p></article>
           <article><h3>Keyboard first</h3><p>Switch panes with Tab. Copy with F5, move with F6, create files with Shift+F4, and create folders with F7. Mark files individually, as a range, or by name pattern; navigate back and forward through each pane’s folder history with Cmd/Ctrl+Left and Right.</p></article>
-          <article><h3>Browse, extract, and create archives</h3><p>Browse ZIP/ZIPX, TAR, 7z, RAR, compressed files, and CPIO, RPM, and DEB contents. Copy selected archive files or folders out with F5. Create ZIP, TAR, TAR.GZ, TAR.BZ2, TAR.XZ, or TAR.ZST with Alt+F5, with optional AES-256 passwords for ZIP. Existing archives stay read-only.</p></article>
+          <article><h3>Your view, remembered</h3><p>Choose brief or detailed views, sorting, shared favourite folders, light and dark themes, density, and font sizes. Pane paths, divider position, and window state persist. <a href="manual.html#settings">Settings</a> also controls deletion, archive browsing, and external apps. Choose from 30 interface languages; restart to apply a language change.</p></article>
+          <article><h3>Find files, keep browsing</h3><p>Search by name or content, with case-sensitive and regular-expression options for names. Optionally search names inside archives. Follow the current search path, jump to a result, or cancel when needed. Folder changes refresh automatically. Switch mounted volumes, swap panes, or open the same folder on both sides.</p></article>
           <article><h3>At home on your OS</h3><p>Copy and paste files between DualCommander and your OS file manager. Open files in default apps, edit externally, reveal files, or launch a terminal. Configure external tools to compare files or folder contents. Right-click for Open With and Get Info on macOS, or Open With and Properties on Windows.</p></article>
-          <article><h3>Your view, remembered</h3><p>Brief and detailed views, sorting, shared favourite folders, light and dark themes, adjustable density, and font sizes. Pane paths, divider position, and window state persist. Choose from 30 interface languages in Settings; restart to apply.</p></article>
-          <article><h3>Find files, keep browsing</h3><p>Search by name or content, follow the current search path, and cancel when needed. Folder changes refresh automatically through native OS notifications. Switch mounted volumes, swap panes, or open the same folder on both sides.</p></article>
+          <article><h3>Browse, extract, and create archives</h3><p>Browse ZIP/ZIPX, TAR, 7z, RAR, compressed files, and CPIO, RPM, and DEB contents. Copy selected archive files or folders out with F5. Create ZIP, TAR, TAR.GZ, TAR.BZ2, TAR.XZ, or TAR.ZST with Alt+F5, with optional AES-256 passwords for ZIP. Existing archives stay read-only. See the <a href="manual.html#archives">archive guide</a> for supported formats and limits.</p></article>
+          <article><h3>Multi-Rename with a preview</h3><p>Rename selected files and folders using captured name parts, sequential numbering, and case conversion. Review original and new names before applying changes; invalid names and destination conflicts block renaming. Open with Alt+F6 and follow the <a href="manual.html#multi-rename">template examples</a>.</p></article>
         </div>
       </section>
       <section id="download" aria-labelledby="download-title">
@@ -127,6 +128,8 @@
           <dt><kbd>F9</kbd></dt><dd>Open terminal in current folder</dd>
           <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>U</kbd></dt><dd>Swap panes</dd>
           <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>E</kbd></dt><dd>Open the same folder in the other pane</dd>
+          <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>,</kbd></dt><dd>Open Settings</dd>
+          <dt><kbd>Alt</kbd> + <kbd>F6</kbd></dt><dd>Multi-Rename selected items with a preview</dd>
         </dl>
         <p>Learn the controls with annotated screenshots, settings, and editor/terminal examples in the <a href="manual.html">online user manual</a>.</p>
       </section>

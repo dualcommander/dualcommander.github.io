@@ -3,6 +3,14 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const vm = require("node:vm");
 
+const manual = fs.readFileSync(`${__dirname}/manual.html`, "utf8");
+const figureWidth = Number(manual.match(/^\s*figure\s*\{[^}]*max-width:\s*([\d.]+)rem/m)?.[1] ?? Infinity);
+const dialogWidth = Number(manual.match(/\.settings-figure\s*\{[^}]*max-width:\s*([\d.]+)rem/)[1]);
+const screenshotMinWidth = Number(manual.match(/\.annotated\s*\{[^}]*min-width:\s*([\d.]+)rem/)[1]);
+assert.ok(figureWidth <= 60, "manual screenshots must stay compact");
+assert.ok(dialogWidth <= 40, "dialog screenshots must stay compact");
+assert.ok(screenshotMinWidth <= dialogWidth, "dialog screenshots must fit their figure without forced scrolling");
+
 function page(saved, dark = false, blocked = false, storage = { value: saved }) {
   const events = {};
   const select = { addEventListener: (name, callback) => { events[name] = callback; } };

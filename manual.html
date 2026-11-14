@@ -33,9 +33,9 @@
     .contents { padding-block: 1rem; border-block: 1px solid var(--line); }
     .contents ul { padding-left: 1.5rem; }
     .contents li { margin-block: .35rem; }
-    figure { margin: 1.5rem 0; }
+    figure { max-width: 60rem; margin: 1.5rem 0; }
     .image-scroll, .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: .5rem; }
-    .annotated { position: relative; min-width: 48rem; background: #fff; }
+    .annotated { position: relative; min-width: 40rem; background: #fff; }
     .annotated img { display: block; width: 100%; height: auto; }
     .pin { position: absolute; left: var(--x); top: var(--y); display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border: 2px solid #fff; border-radius: 50%; background: var(--accent); color: #fff; font-size: .9rem; font-weight: 750; line-height: 1; text-decoration: none; }
     .pin:hover { background: #000; }
@@ -44,7 +44,7 @@
     .hints { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); gap: 1rem 2rem; padding-left: 1.75rem; }
     .hints li::marker { color: var(--accent); font-weight: 750; }
     .hints strong { display: block; }
-    .settings-figure { max-width: 56.25rem; }
+    .settings-figure { max-width: 40rem; }
     .callout { padding: .5rem 1rem; border-left: 2px solid var(--line); }
     kbd { border: 1px solid var(--line); border-bottom-width: 3px; border-radius: .25rem; padding: .1rem .35rem; background: var(--card); font-size: .9em; }
     code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: .9em; overflow-wrap: anywhere; }
@@ -103,6 +103,7 @@
             </ul>
           </li>
           <li><a href="#archives">Browse, extract, and create archives</a></li>
+          <li><a href="#multi-rename">Multi-Rename templates</a></li>
           <li><a href="#saved-settings">Saved settings and sharing configuration</a>
             <ul>
               <li><a href="#settings-example">settings.json example</a></li>
@@ -292,6 +293,88 @@
         <p>ZIP optionally supports a password with confirmation, using AES-256. File names remain visible, and some archive tools cannot open encrypted ZIP files. Other creation formats do not support passwords. Existing files are never replaced; choose a new name. Creation runs in the background, and cancellation or failure removes its partial archive.</p>
         <p>Archive creation rejects symbolic links and special files. Choose a destination outside any selected folder.</p>
       </section>
+      <section id="multi-rename" aria-labelledby="multi-rename-title">
+        <h2 id="multi-rename-title">Multi-Rename templates</h2>
+        <p>Mark files or folders, then choose <strong>File → Multi-Rename…</strong> (<kbd>Alt</kbd> + <kbd>F6</kbd>). Without marks, the current cursor item is used. Only those items are renamed: folder contents are never traversed.</p>
+        <figure class="settings-figure">
+          <div class="image-scroll" tabindex="0" role="region" aria-label="Annotated Multi-Rename screenshot; scroll horizontally on smaller screens">
+            <div class="annotated">
+              <img src="screenshots/manual-multi-rename-dark.png" alt="Multi-Rename in dark mode, matching {name}.{ext} and adding a three-digit counter to three JPG file names. Numbered explanations follow below." width="700" height="600" loading="lazy">
+              <a class="pin" style="--x: 91%; --y: 11.5%" href="#rename-match" aria-label="1. Match template">1</a>
+              <a class="pin" style="--x: 91%; --y: 19.5%" href="#rename-name" aria-label="2. Name template">2</a>
+              <a class="pin" style="--x: 91%; --y: 34%" href="#rename-preview" aria-label="3. Preview">3</a>
+              <a class="pin" style="--x: 27%; --y: 84%" href="#rename-selection" aria-label="4. Selected items">4</a>
+              <a class="pin" style="--x: 58%; --y: 91.5%" href="#rename-actions" aria-label="5. Rename and Cancel">5</a>
+              <a class="pin" style="--x: 29%; --y: 3%" href="#rename-help" aria-label="6. Help and user manual">6</a>
+            </div>
+          </div>
+          <figcaption>Multi-Rename in dark mode: add a three-digit suffix while keeping each file’s name and extension.</figcaption>
+        </figure>
+        <ol class="hints">
+          <li id="rename-match"><strong>Match template</strong>Choose which names match and capture the parts to reuse. Here, <code>{name}.{ext}</code> captures the name and extension. Matching is case-sensitive and covers the whole name.</li>
+          <li id="rename-name"><strong>Name template</strong>Build the new name from captures, literal text, helpers, and numbering. Here, <code>{{.name}}_{{index 3}}.{{.ext}}</code> adds <code>_001</code>, <code>_002</code>, and <code>_003</code> before the extension.</li>
+          <li id="rename-preview"><strong>Preview</strong>Compare Original and New name before applying. Preview updates as you type; unchanged and nonmatching items are identified, and invalid names or conflicts block Rename.</li>
+          <li id="rename-selection"><strong>Selected items</strong>Counts show the files and folders included when the dialog opened. Numbering follows matching selected items in pane order, not the order you marked them.</li>
+          <li id="rename-actions"><strong>Rename and Cancel</strong>Rename applies the valid preview. Cancel or <kbd>Esc</kbd> closes the dialog without renaming anything.</li>
+          <li id="rename-help"><strong>Help and user manual</strong>The information icon shows syntax hints and examples. User manual opens this section in your browser.</li>
+        </ol>
+        <h3>Template examples</h3>
+        <p><strong>Match template</strong> matches the whole name, case-sensitive. Literal characters match themselves; <code>{name}</code> captures text (including empty text). Capture names use letters, digits, or underscores, cannot start with a digit, and must be unique. Captures take the shortest text that allows the remaining pattern to match. Thus <code>{name}.{ext}</code> splits at the first dot, not necessarily the last dot. Anonymous captures <code>{}</code> receive names <code>C0</code>, <code>C1</code>, and so on, numbered by capture position starting at zero, including named captures.</p>
+        <p><strong>Name template</strong> uses a restricted subset of Go's <a href="https://pkg.go.dev/text/template">official text/template syntax</a>: literal text, capture fields such as <code>{{.name}}</code>, the six case helpers below, and sequential numbering. The dot is required for captures. Values are inserted literally, without HTML escaping. Unknown captures are errors. Loops, conditionals, variables, template definitions, other functions, pipelines, nested calls, and nested fields are not supported. The match syntax is specific to DualCommander; it is not Go template syntax or a user-supplied regular expression.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Operation</th><th>Match template</th><th>Name template</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Keep name (default)</td><td><code>{name}.{ext}</code></td><td><code>{{.name}}.{{.ext}}</code></td><td><code>photo.jpg → photo.jpg</code></td></tr>
+              <tr><td>Change extension</td><td><code>{name}.jpg</code></td><td><code>{{.name}}.png</code></td><td><code>photo.jpg → photo.png</code></td></tr>
+              <tr><td>Add prefix and suffix</td><td><code>{name}.{ext}</code></td><td><code>backup_{{.name}}_old.{{.ext}}</code></td><td><code>photo.jpg → backup_photo_old.jpg</code></td></tr>
+              <tr><td>Reorder parts</td><td><code>{first}-{last}.{ext}</code></td><td><code>{{.last}}-{{.first}}.{{.ext}}</code></td><td><code>one-two.jpg → two-one.jpg</code></td></tr>
+              <tr><td>Anonymous captures</td><td><code>{}-{}.jpg</code></td><td><code>{{.C1}}-{{.C0}}.png</code></td><td><code>one-two.jpg → two-one.png</code></td></tr>
+              <tr><td>Names without extension</td><td><code>{name}</code></td><td><code>backup_{{.name}}</code></td><td><code>LICENSE → backup_LICENSE</code></td></tr>
+              <tr><td>Literal extension case change</td><td><code>{name}.jpg</code></td><td><code>{{.name}}.JPG</code></td><td><code>photo.jpg → photo.JPG</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Sequential numbering</h3>
+        <p>Numbering belongs in the name template, not a checkbox. Use <code>{{index}}</code> for a counter starting at 1, or <code>{{index 3}}</code> for at least three digits. Each row below starts a fresh preview; examples show the first two matching selected items in pane order.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Operation</th><th>Match template</th><th>Name template</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Unpadded suffix</td><td><code>{name}.{ext}</code></td><td><code>{{.name}}_{{index}}.{{.ext}}</code></td><td><code>photo.jpg → photo_1.jpg</code><br><code>portrait.jpg → portrait_2.jpg</code></td></tr>
+              <tr><td>Three-digit suffix (screenshot)</td><td><code>{name}.{ext}</code></td><td><code>{{.name}}_{{index 3}}.{{.ext}}</code></td><td><code>photo.jpg → photo_001.jpg</code><br><code>portrait.jpg → portrait_002.jpg</code></td></tr>
+              <tr><td>Two-digit prefix</td><td><code>{name}.{ext}</code></td><td><code>{{index 2}}_{{.name}}.{{.ext}}</code></td><td><code>photo.jpg → 01_photo.jpg</code><br><code>portrait.jpg → 02_portrait.jpg</code></td></tr>
+              <tr><td>Replace name with counter</td><td><code>{name}.jpeg</code></td><td><code>{{index 2}}.jpeg</code></td><td><code>photo.jpeg → 01.jpeg</code><br><code>portrait.jpeg → 02.jpeg</code></td></tr>
+              <tr><td>Folders or extensionless names</td><td><code>{name}</code></td><td><code>{{.name}}_{{index 3}}</code></td><td><code>Documents → Documents_001</code><br><code>LICENSE → LICENSE_002</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Match templates do not use wildcards: use <code>{name}.jpeg</code>, not <code>*.jpeg</code>.</p>
+        <p>Numbering follows the current pane order of matching selected files and folders. Nonmatching items do not consume a number; matching items do, even if their resulting name is unchanged. Each preview restarts at 1, so typing or recalculating never advances a persistent counter. Review the preview before Rename. No start, step, or numbering settings are needed.</p>
+        <p><code>index</code> takes no arguments or one literal digit from <code>1</code> through <code>9</code> for zero-padding width. Width is a minimum: 100 stays 100 with <code>{{index 2}}</code>. Repeated calls within one name use the same number, not successive numbers. For folders and extensionless names, match <code>{name}</code> and use <code>{{.name}}_{{index 3}}</code>; only the template decides where numbering goes.</p>
+        <p>Existing patterns <code>{{.Index}}</code> and <code>{{printf "%02d" .Index}}</code> also work. <code>Index</code> is reserved and cannot name a capture. The only supported <code>printf</code> call is a literal zero-padding format from <code>"%01d"</code> through <code>"%09d"</code>, applied to <code>.Index</code>. Other formatting, arithmetic, custom starts/steps, arguments to <code>index</code> that are not literal digits, and case helpers on <code>.Index</code> are not supported. See Go's <a href="https://pkg.go.dev/fmt#hdr-Printing">formatting documentation</a> for decimal zero-padding semantics.</p>
+
+        <h3>Case conversion helpers</h3>
+        <p>Six helpers are registered through Go's <a href="https://pkg.go.dev/text/template#Template.Funcs">Funcs</a>. Each accepts exactly one captured field, for example <code>{{upper .name}}</code>. Helpers cannot be nested or piped. With match template <code>{name}.{ext}</code>:</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Operation</th><th>Name template</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Uppercase name, lowercase extension</td><td><code>{{upper .name}}.{{lower .ext}}</code></td><td><code>photo.JPG → PHOTO.jpg</code></td></tr>
+              <tr><td>Lowercase name and extension</td><td><code>{{lower .name}}.{{lower .ext}}</code></td><td><code>PHOTO.JPG → photo.jpg</code></td></tr>
+              <tr><td>kebab-case</td><td><code>{{kebab .name}}.{{lower .ext}}</code></td><td><code>CaaZaa.JPG → caa-zaa.jpg</code></td></tr>
+              <tr><td>snake_case</td><td><code>{{snake .name}}.{{.ext}}</code></td><td><code>HTTPServer.jpg → http_server.jpg</code></td></tr>
+              <tr><td>camelCase</td><td><code>{{camel .name}}.{{.ext}}</code></td><td><code>caa_zaa.jpg → caaZaa.jpg</code></td></tr>
+              <tr><td>PascalCase</td><td><code>{{pascal .name}}.{{.ext}}</code></td><td><code>caa-zaa.jpg → CaaZaa.jpg</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><code>upper</code> and <code>lower</code> use Go's Unicode-aware <a href="https://pkg.go.dev/strings#ToUpper">strings.ToUpper</a> and <a href="https://pkg.go.dev/strings#ToLower">strings.ToLower</a>: <code>été.JPG → ÉTÉ.jpg</code> with the first template above. These are locale-independent, not language-specific casing rules or transliteration.</p>
+        <p>The other four helpers use <a href="https://pkg.go.dev/github.com/huandu/xstrings">xstrings</a> word boundaries. For <code>snake</code>, examples include <code>HTTPServer → http_server</code>, <code>Version2ID → version2_id</code>, <code>ÉtéPhoto → été_photo</code>, and <code>hello world-test → hello_world_test</code>. Digits, acronyms, repeated separators, and punctuation follow the library's rules, not a configurable dictionary. Do not assume punctuation or repeated separators will be removed. Review the preview, especially for dotfiles; use <code>{name}</code> to capture an entire extensionless name.</p>
+        <p>Unsupported examples: <code>{{upper}}</code> (missing capture), <code>{{upper .missing}}</code> (unknown capture), <code>{{upper "text"}}</code> (not a capture), <code>{{upper (lower .name)}}</code> (nested call), and <code>{{.name | upper}}</code> (pipeline). Conversion may make distinct names collide; conflicts block Rename. Renaming an extension does not convert file contents.</p>
+        <p>The preview updates automatically after valid edits. Review <strong>Original</strong> and <strong>New name</strong>, then click <strong>Rename</strong>. Editing invalidates the previous preview. Nonmatching names remain unchanged without a suffix; matching identity results show <strong>Unchanged</strong>. Counts describe the selected items, not the number of changes. Invalid syntax, invalid filenames, and destination conflicts appear in the dialog and prevent renaming. Nothing changes on disk until Rename is clicked; Cancel, Escape, and closing the dialog cancel pending preview work.</p>
+      </section>
+
       <section id="saved-settings" aria-labelledby="saved-title">
         <h2 id="saved-title">Saved settings and sharing configuration</h2>
         <p>DualCommander stores configuration under <code>~/.dualcommander/</code> in your home folder (on Windows, normally <code>C:\Users\YourName\.dualcommander\</code>):</p>
