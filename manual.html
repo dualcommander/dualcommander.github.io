@@ -146,7 +146,7 @@
         <ol class="hints">
           <li id="pane-volume"><strong>Volumes and disk space</strong>The top-left dropdown selects a mounted drive or volume. The top-right value shows free space for that pane’s filesystem by default; turn off Show free disk space in Settings to show used space instead.</li>
           <li id="pane-path"><strong>Navigation and path</strong>Home opens your home folder; the up arrow goes to the parent. Enter a path in the field and press <kbd>Enter</kbd>. The <code>..</code> row, <kbd>Backspace</kbd>, or <kbd>Mod</kbd>+<kbd>↑</kbd> also goes up.</li>
-          <li id="pane-favourites"><strong>Favourite folders</strong>The star adds/removes the current folder. The adjacent dropdown opens saved favourites, shared between both panes.</li>
+          <li id="pane-favourites"><strong>Favourite folders</strong>The star (or <kbd>Mod</kbd>+<kbd>D</kbd>) adds/removes the current folder. The adjacent dropdown (or <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>) opens saved favourites, shared between both panes; press a number key to open that entry.</li>
           <li id="pane-view"><strong>Brief or Detailed</strong>The view button toggles this pane’s layout. Its icon shows the view you can switch to. Brief emphasises names; Detailed also shows size, modified date, and attributes. Use <kbd>Mod</kbd>+<kbd>1</kbd> / <kbd>2</kbd> for the active pane.</li>
           <li id="pane-sort"><strong>Sort headers</strong>Click Name, Size, or Date to sort; click again to reverse. The triangle shows direction. Sorting works in both views.</li>
           <li id="pane-files"><strong>Cursor versus marks</strong>Click sets the cursor; double-click or <kbd>Enter</kbd> opens. Marked names use a distinct colour (red here). <kbd>Space</kbd>/<kbd>Insert</kbd> or <kbd>Mod</kbd>+click toggles marks; <kbd>Shift</kbd>+click marks a range. Copy, move, and delete use marks, or the cursor item if none are marked.</li>
@@ -165,6 +165,8 @@
             <tbody>
               <tr><th scope="row">Open</th><td><kbd>Enter</kbd> / <kbd>Mod</kbd>+<kbd>O</kbd></td><td>Enter a folder or supported archive; open other files with the OS-associated application.</td></tr>
               <tr><th scope="row">Home folder</th><td><kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd></td><td>Open your home folder in the active pane.</td></tr>
+              <tr><th scope="row">Star folder</th><td><kbd>Mod</kbd>+<kbd>D</kbd></td><td>Add or remove the active pane’s folder from your favourites (Go → Star Folder).</td></tr>
+              <tr><th scope="row">Starred folders</th><td><kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd></td><td>Open the numbered favourites list for the active pane. Press <kbd>1</kbd>–<kbd>9</kbd> to open that folder, or <kbd>Esc</kbd> to close.</td></tr>
               <tr><th scope="row">Compare files / folders</th><td><kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>D</kbd> / <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd></td><td>Compare the cursor files in both panes, or the two folder contents. Needs a comparison command set in Settings.</td></tr>
               <tr><th scope="row">Edit</th><td><kbd>F4</kbd></td><td>Open the cursor file in your configured external editor. No built-in editor.</td></tr>
               <tr><th scope="row">New file</th><td><kbd>Shift</kbd>+<kbd>F4</kbd></td><td>Enter a name; create and select the file. Press F4 afterwards to edit it.</td></tr>
@@ -187,11 +189,11 @@
       </section>
       <section id="settings" aria-labelledby="settings-title">
         <h2 id="settings-title">Settings tour</h2>
-        <p>Open <strong>Settings</strong> with <kbd>Mod</kbd>+<kbd>,</kbd> or the application menu (DualCommander on macOS; File on Windows/Linux). Changes save automatically; there is no Save button. Invalid command lists are not saved.</p>
+        <p>Open <strong>Settings</strong> with <kbd>Mod</kbd>+<kbd>,</kbd> or the application menu (DualCommander on macOS; File on Windows/Linux). Changes save automatically; there is no Save button. Invalid command lists are not saved. The <strong>User manual</strong> link at the top of the dialog opens this section in your browser.</p>
         <figure class="settings-figure">
           <div class="image-scroll" tabindex="0" role="region" aria-label="Annotated settings screenshot; scroll horizontally on smaller screens">
             <div class="annotated">
-              <picture><source data-dark media="(prefers-color-scheme: dark)" srcset="screenshots/manual-settings-dark.png"><img src="screenshots/manual-settings.png" alt="Complete Settings form showing Appearance, File views, File deletion, Archives, and all five External applications fields, including Compare files and Compare folder contents. Numbered explanations follow below." width="900" height="1169" loading="lazy"></picture>
+              <picture><source data-dark media="(prefers-color-scheme: dark)" srcset="screenshots/manual-settings-dark.png"><img src="screenshots/manual-settings.png" alt="Complete Settings form showing Appearance, File views, File deletion, Archives, and all five External applications fields, including Compare files and Compare folder contents. Numbered explanations follow below." width="900" height="1268" loading="lazy"></picture>
               <a class="pin" style="--x: 89%; --y: 6.5%" href="#setting-appearance" aria-label="1. Appearance">1</a>
               <a class="pin" style="--x: 89%; --y: 19.5%" href="#setting-views" aria-label="2. File views">2</a>
               <a class="pin" style="--x: 89%; --y: 32.5%" href="#setting-deletion" aria-label="3. File deletion">3</a>
@@ -202,7 +204,7 @@
           <figcaption>Full settings content in the site’s selected theme, with macOS defaults shown as placeholder text. Scroll the dialog on shorter displays; defaults differ by OS.</figcaption>
         </figure>
         <ol class="hints">
-          <li id="setting-appearance"><strong>Appearance</strong>Theme follows the system or uses light/dark. Density chooses standard or compact file rows. Font size adjusts file-list text; use larger text for readability or compact rows to fit more files.</li>
+          <li id="setting-appearance"><strong>Appearance</strong>Theme follows the system or uses light/dark. Density chooses standard or compact file rows. Font size (XXS to XXL, default S) adjusts file-list text; use larger text for readability or compact rows to fit more files.</li>
           <li id="setting-views"><strong>File views</strong>Choose Brief/Detailed separately for left and right. Show hidden files affects both panes; <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> toggles it while browsing. Show free disk space switches the volume indicator between free and used space.</li>
           <li id="setting-deletion"><strong>File deletion</strong>Move deleted files to Trash is enabled by default. Disabling it makes deletion permanent.</li>
           <li id="setting-archives"><strong>Archives</strong>Browse archives in DualCommander opens supported archives like folders. Turn it off to use the OS-associated application instead. Browsing does not enable archive editing.</li>
@@ -299,16 +301,16 @@
         <figure class="settings-figure">
           <div class="image-scroll" tabindex="0" role="region" aria-label="Annotated Multi-Rename screenshot; scroll horizontally on smaller screens">
             <div class="annotated">
-              <img src="screenshots/manual-multi-rename-dark.png" alt="Multi-Rename in dark mode, matching {name}.{ext} and adding a three-digit counter to three JPG file names. Numbered explanations follow below." width="700" height="600" loading="lazy">
-              <a class="pin" style="--x: 91%; --y: 11.5%" href="#rename-match" aria-label="1. Match template">1</a>
-              <a class="pin" style="--x: 91%; --y: 19.5%" href="#rename-name" aria-label="2. Name template">2</a>
-              <a class="pin" style="--x: 91%; --y: 34%" href="#rename-preview" aria-label="3. Preview">3</a>
-              <a class="pin" style="--x: 27%; --y: 84%" href="#rename-selection" aria-label="4. Selected items">4</a>
-              <a class="pin" style="--x: 58%; --y: 91.5%" href="#rename-actions" aria-label="5. Rename and Cancel">5</a>
-              <a class="pin" style="--x: 29%; --y: 3%" href="#rename-help" aria-label="6. Help and user manual">6</a>
+              <picture><source data-dark media="(prefers-color-scheme: dark)" srcset="screenshots/manual-multi-rename-dark.png"><img src="screenshots/manual-multi-rename.png" alt="Multi-Rename matching {name}.{ext} and adding a three-digit counter to three JPG file names. Numbered explanations follow below." width="700" height="600" loading="lazy"></picture>
+              <a class="pin" style="--x: 91%; --y: 13.7%" href="#rename-match" aria-label="1. Match template">1</a>
+              <a class="pin" style="--x: 91%; --y: 21.2%" href="#rename-name" aria-label="2. Name template">2</a>
+              <a class="pin" style="--x: 91%; --y: 36.5%" href="#rename-preview" aria-label="3. Preview">3</a>
+              <a class="pin" style="--x: 20%; --y: 86.7%" href="#rename-selection" aria-label="4. Selected items">4</a>
+              <a class="pin" style="--x: 50%; --y: 94.3%" href="#rename-actions" aria-label="5. Rename and Cancel">5</a>
+              <a class="pin" style="--x: 23%; --y: 5.8%" href="#rename-help" aria-label="6. Help and user manual">6</a>
             </div>
           </div>
-          <figcaption>Multi-Rename in dark mode: add a three-digit suffix while keeping each file’s name and extension.</figcaption>
+          <figcaption>Multi-Rename: add a three-digit suffix while keeping each file’s name and extension.</figcaption>
         </figure>
         <ol class="hints">
           <li id="rename-match"><strong>Match template</strong>Choose which names match and capture the parts to reuse. Here, <code>{name}.{ext}</code> captures the name and extension. Matching is case-sensitive and covers the whole name.</li>
@@ -391,7 +393,7 @@
         <h3 id="settings-example">settings.json example</h3>
         <p>This sample uses OS-default reveal, terminal, and editor apps, with comparison disabled. A command is stored as a <strong>string containing a JSON argument list</strong>, not as an array. For example, VS Code is <code>"editorCommand": "[\"code\",\"--wait\",\"{path}\"]"</code>. Use the commands from the editor and terminal sections above, escaping their double quotes when placing them inside this file.</p>
         <pre><code class="config-example" data-file="settings.json">{
-  "appearance": { "theme": "system", "density": "standard", "fontSize": "medium" },
+  "appearance": { "theme": "system", "density": "standard", "fontSize": "S" },
   "views": {
     "left": { "brief": true },
     "right": { "brief": false },
